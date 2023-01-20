@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CivilizationOfHegemony", "CivilizationOfHegemony\CivilizationOfHegemony.csproj", "{1456CA76-2508-446C-A631-78841E4C7404}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1456CA76-2508-446C-A631-78841E4C7404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1456CA76-2508-446C-A631-78841E4C7404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1456CA76-2508-446C-A631-78841E4C7404}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1456CA76-2508-446C-A631-78841E4C7404}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E92B09FC-F598-4445-9841-9A8A03C4EABF}
+	EndGlobalSection
+EndGlobal
