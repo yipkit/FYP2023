@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <script language = "Javascript">
+       var images = ["CivilizationOfHegemony.png", "HappyBirthday.png", "COMINGSOON.jpg"];
+    var count = 0;
+    function previousImage() 
+    {
+        
+        if(count!=0)
+            count--;
+        var id = document.getElementById("imageId");
+        id.src = "src/Banner/" + images[count];
+    }
+    function nextImage() {
+        
+        if(count!=2)
+            count++;
+        var id = document.getElementById("imageId");
+        id.src = "src/Banner/" + images[count];
+    }
+    </script>
+    <head>
+        <title> NLY Games Homepage</title>
+    </head>
+    <header>
+        <a href="index.html"><img src="src/NLYGames_iconVer2.png" class="CompanyIcon" ></a>
+    </header>
+    <body>
+        <div class="text-h-center">
+            <a href="index.html"><button class ="btn " >Homepage</button></a>
+
+            <a href="Corporate.html"><button class ="btn " >Corporate</button></a>
+
+            <a href="Press.html"><button class ="btn " >Press</button></a>
+
+            <a href="Works.html"><button class ="btn " >Works</button></a>
+
+            <a href="Contact.html"><button class ="btn " >Contact</button></a>
+        </div>
+            <center>
+                <img class ="pic" id="imageId" src="src/Banner/CivilizationOfHegemony.png" width="1920" height="1080"/>  
+                <br/>
+                <hr>
+                <img src="src/Banner/Back.png" onclick="previousImage()"/>
+                <img src="src/Banner/nextpage.png" onclick="nextImage()"/>
+            </center>
+        <p class="copyright text-h-center text-v-center">@ NLY Games, lnc.</p>
+    </body>
+</html>
