@@ -51,14 +51,55 @@
     margin-bottom: 16px;
     width: auto;
     padding: 20px 20px;
-    font-size: 32px;
+    font-size: 12px;
     text-align: center;
     vertical-align: middle;
     display: inline-block;
     text-decoration: none !important;
-    border-radius: 10%;
+    border-radius: 30%;
+    background-color: rgb(26, 103, 148);
   }
   .default {
     border-color: #e7e7e7;
     color: black;
-  }  
+  }
+  .ulSetting {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+  }
+
+  .liSetting {
+      float: left;
+  }
+
+  .lia {
+      display: block;
+      color: rgb(0, 110, 255);
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+  }
+
+  .lia1:hover {
+      background-color: #111;
+  }
+
+  .worksSetting{
+    font-size: xx-large;
+    font-style: italic;
+
+  }
+  .TitleBorder{
+    border-style: hidden;
+    border-radius: 30%;
+    border: 1px solid black;
+    border-collapse: separate;
+    
+  }
+  .TablePositionCenter{
+    margin-left:auto; 
+    margin-right:auto;
+  }
