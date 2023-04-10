@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{70F40A0A-1D48-4321-B167-2759C90A2851}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>FYP_sale_book_system</RootNamespace>
+    <AssemblyName>FYP_sale_book_system</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Azure.Core, Version=1.30.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Azure.Core.1.30.0\lib\net461\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.21.9.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.21.9\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.1.2.6\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.2.6.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Compression.LZ4.Streams.1.2.6\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>..\packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.7.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Graph, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.5.4.0\lib\netstandard2.0\Microsoft.Graph.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Graph.Core, Version=3.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Graph.Core.3.0.4\lib\net462\Microsoft.Graph.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.27.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.6.27.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.27.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.27.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.27.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.27.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols, Version=6.27.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.6.27.0\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect, Version=6.27.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.6.27.0\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.27.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.27.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Abstractions, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Abstractions.1.1.0\lib\netstandard2.0\Microsoft.Kiota.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Authentication.Azure, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Authentication.Azure.1.0.2\lib\netstandard2.0\Microsoft.Kiota.Authentication.Azure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Http.HttpClientLibrary, Version=1.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Http.HttpClientLibrary.1.0.1\lib\netstandard2.0\Microsoft.Kiota.Http.HttpClientLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Serialization.Form, Version=1.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Serialization.Form.1.0.1\lib\netstandard2.0\Microsoft.Kiota.Serialization.Form.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Serialization.Json, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Serialization.Json.1.0.3\lib\netstandard2.0\Microsoft.Kiota.Serialization.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kiota.Serialization.Text, Version=1.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Kiota.Serialization.Text.1.0.1\lib\netstandard2.0\Microsoft.Kiota.Serialization.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.32.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.8.0.32.1\lib\net48\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.EntityFramework, Version=8.0.29.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Web, Version=8.0.29.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Schema, Version=3.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Schema.3.0.14\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.27.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.27.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory.Data, Version=1.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.Data.1.0.2\lib\net461\System.Memory.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Json, Version=7.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.Json.7.0.1\lib\net462\System.Net.Http.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WinHttpHandler, Version=7.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.WinHttpHandler.7.0.0\lib\net462\System.Net.Http.WinHttpHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Claims, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Claims.4.3.0\lib\net46\System.Security.Claims.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.Encodings.Web, Version=7.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.7.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=7.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.7.0.2\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tavis.UriTemplates, Version=2.0.0.0, Culture=neutral, PublicKeyToken=5be2d48fa8a60581, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tavis.UriTemplates.2.0.0\lib\netstandard2.0\Tavis.UriTemplates.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Accounting_Purchase_Order_Approval.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounting_Purchase_Order_Approval.Designer.cs">
+      <DependentUpon>Accounting_Purchase_Order_Approval.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounting_T_Account.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounting_T_Account.Designer.cs">
+      <DependentUpon>Accounting_T_Account.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounting_UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounting_UI.Designer.cs">
+      <DependentUpon>Accounting_UI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accounting_EditTAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accounting_EditTAccount.Designer.cs">
+      <DependentUpon>Accounting_EditTAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="apiKey.cs" />
+    <Compile Include="CheckCreditCardNo.cs" />
+    <Compile Include="CheckUserRight.cs" />
+    <Compile Include="connDB.cs" />
+    <Compile Include="customer_borrow_e_book_and_book.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="customer_borrow_e_book_and_book.Designer.cs">
+      <DependentUpon>customer_borrow_e_book_and_book.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer_Login_UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer_Login_UI.Designer.cs">
+      <DependentUpon>Customer_Login_UI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="customer_payment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="customer_payment.Designer.cs">
+      <DependentUpon>customer_payment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="customer_return_book.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="customer_return_book.Designer.cs">
+      <DependentUpon>customer_return_book.cs</DependentUpon>
+    </Compile>
+    <Compile Include="customer_search_book.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="customer_search_book.Designer.cs">
+      <DependentUpon>customer_search_book.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Customer_UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Customer_UI.Designer.cs">
+      <DependentUpon>Customer_UI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="deleteKEY.cs" />
+    <Compile Include="ErrorControl.cs" />
+    <Compile Include="FYP_Company_UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FYP_Company_UI.Designer.cs">
+      <DependentUpon>FYP_Company_UI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GenApprovalCode.cs" />
+    <Compile Include="GenKEY.cs" />
+    <Compile Include="GenOrder.cs" />
+    <Compile Include="it_create_user_account.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="it_create_user_account.Designer.cs">
+      <DependentUpon>it_create_user_account.cs</DependentUpon>
+    </Compile>
+    <Compile Include="it_ModifyCustomerData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="it_ModifyCustomerData.Designer.cs">
+      <DependentUpon>it_ModifyCustomerData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="it_review_user_account.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="it_review_user_account.Designer.cs">
+      <DependentUpon>it_review_user_account.cs</DependentUpon>
+    </Compile>
+    <Compile Include="it_UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="it_UI.Designer.cs">
+      <DependentUpon>it_UI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="it_update_user_account.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="it_update_user_account.Designer.cs">
+      <DependentUpon>it_update_user_account.cs</DependentUpon>
+    </Compile>
+    <Compile Include="openWeather.cs" />
+    <Compile Include="PassPersonalData.cs" />
+    <Compile Include="procurement_add_new_item.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_add_new_item.Designer.cs">
+      <DependentUpon>procurement_add_new_item.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_add_new_item_information.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_add_new_item_information.Designer.cs">
+      <DependentUpon>procurement_add_new_item_information.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_check_purchase_order.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_check_purchase_order.Designer.cs">
+      <DependentUpon>procurement_check_purchase_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_check_sale_re_order.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_check_sale_re_order.Designer.cs">
+      <DependentUpon>procurement_check_sale_re_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_create_purchase_order.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_create_purchase_order.Designer.cs">
+      <DependentUpon>procurement_create_purchase_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_delivery_note_record.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_delivery_note_record.Designer.cs">
+      <DependentUpon>procurement_delivery_note_record.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_edit_stock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_edit_stock.Designer.cs">
+      <DependentUpon>procurement_edit_stock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_invoice_record.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_invoice_record.Designer.cs">
+      <DependentUpon>procurement_invoice_record.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_review_delivery_note.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_review_delivery_note.Designer.cs">
+      <DependentUpon>procurement_review_delivery_note.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_review_invoice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_review_invoice.Designer.cs">
+      <DependentUpon>procurement_review_invoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_review_stock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_review_stock.Designer.cs">
+      <DependentUpon>procurement_review_stock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_stock_book.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_stock_book.Designer.cs">
+      <DependentUpon>procurement_stock_book.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_stock_take.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_stock_take.Designer.cs">
+      <DependentUpon>procurement_stock_take.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_stock_take_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_stock_take_form.Designer.cs">
+      <DependentUpon>procurement_stock_take_form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_UI.Designer.cs">
+      <DependentUpon>procurement_UI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="procurement_update_stock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="procurement_update_stock.Designer.cs">
+      <DependentUpon>procurement_update_stock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SalesAndIT_CreateCustomerAccount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SalesAndIT_CreateCustomerAccount.Designer.cs">
+      <DependentUpon>SalesAndIT_CreateCustomerAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sales_create_Ebook_order.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sales_create_Ebook_order.Designer.cs">
+      <DependentUpon>sales_create_Ebook_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sales_check_sales_stock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sales_check_sales_stock.Designer.cs">
+      <DependentUpon>sales_check_sales_stock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sales_create_sales_order.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sales_create_sales_order.Designer.cs">
+      <DependentUpon>sales_create_sales_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sales_Payment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sales_Payment.Designer.cs">
+      <DependentUpon>sales_Payment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sales_re_order.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sales_re_order.Designer.cs">
+      <DependentUpon>sales_re_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sales_StockTake.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sales_StockTake.Designer.cs">
+      <DependentUpon>sales_StockTake.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sales_UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sales_UI.Designer.cs">
+      <DependentUpon>sales_UI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sale_edit_ebook_link.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sale_edit_ebook_link.Designer.cs">
+      <DependentUpon>sale_edit_ebook_link.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sale_gen_Ebook_link.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sale_gen_Ebook_link.Designer.cs">
+      <DependentUpon>sale_gen_Ebook_link.cs</DependentUpon>
+    </Compile>
+    <Compile Include="sqlFunction.cs" />
+    <Compile Include="Staff_Login_UI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Staff_Login_UI.Designer.cs">
+      <DependentUpon>Staff_Login_UI.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Accounting_EditTAccount.resx">
+      <DependentUpon>Accounting_EditTAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounting_Purchase_Order_Approval.resx">
+      <DependentUpon>Accounting_Purchase_Order_Approval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounting_T_Account.resx">
+      <DependentUpon>Accounting_T_Account.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accounting_UI.resx">
+      <DependentUpon>Accounting_UI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="customer_borrow_e_book_and_book.resx">
+      <DependentUpon>customer_borrow_e_book_and_book.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer_Login_UI.resx">
+      <DependentUpon>Customer_Login_UI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="customer_payment.resx">
+      <DependentUpon>customer_payment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="customer_return_book.resx">
+      <DependentUpon>customer_return_book.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="customer_search_book.resx">
+      <DependentUpon>customer_search_book.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Customer_UI.resx">
+      <DependentUpon>Customer_UI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FYP_Company_UI.resx">
+      <DependentUpon>FYP_Company_UI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="it_create_user_account.resx">
+      <DependentUpon>it_create_user_account.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="it_ModifyCustomerData.resx">
+      <DependentUpon>it_ModifyCustomerData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="it_review_user_account.resx">
+      <DependentUpon>it_review_user_account.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="it_UI.resx">
+      <DependentUpon>it_UI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="it_update_user_account.resx">
+      <DependentUpon>it_update_user_account.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_add_new_item.resx">
+      <DependentUpon>procurement_add_new_item.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_add_new_item_information.resx">
+      <DependentUpon>procurement_add_new_item_information.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_check_purchase_order.resx">
+      <DependentUpon>procurement_check_purchase_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_check_sale_re_order.resx">
+      <DependentUpon>procurement_check_sale_re_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_create_purchase_order.resx">
+      <DependentUpon>procurement_create_purchase_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_delivery_note_record.resx">
+      <DependentUpon>procurement_delivery_note_record.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_edit_stock.resx">
+      <DependentUpon>procurement_edit_stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_invoice_record.resx">
+      <DependentUpon>procurement_invoice_record.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_review_delivery_note.resx">
+      <DependentUpon>procurement_review_delivery_note.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_review_invoice.resx">
+      <DependentUpon>procurement_review_invoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_review_stock.resx">
+      <DependentUpon>procurement_review_stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_stock_book.resx">
+      <DependentUpon>procurement_stock_book.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_stock_take.resx">
+      <DependentUpon>procurement_stock_take.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_stock_take_form.resx">
+      <DependentUpon>procurement_stock_take_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_UI.resx">
+      <DependentUpon>procurement_UI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="procurement_update_stock.resx">
+      <DependentUpon>procurement_update_stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="SalesAndIT_CreateCustomerAccount.resx">
+      <DependentUpon>SalesAndIT_CreateCustomerAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sales_create_Ebook_order.resx">
+      <DependentUpon>sales_create_Ebook_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sales_check_sales_stock.resx">
+      <DependentUpon>sales_check_sales_stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sales_create_sales_order.resx">
+      <DependentUpon>sales_create_sales_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sales_Payment.resx">
+      <DependentUpon>sales_Payment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sales_re_order.resx">
+      <DependentUpon>sales_re_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sales_StockTake.resx">
+      <DependentUpon>sales_StockTake.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sales_UI.resx">
+      <DependentUpon>sales_UI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sale_edit_ebook_link.resx">
+      <DependentUpon>sale_edit_ebook_link.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sale_gen_Ebook_link.resx">
+      <DependentUpon>sale_gen_Ebook_link.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Staff_Login_UI.resx">
+      <DependentUpon>Staff_Login_UI.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
+</Project>
