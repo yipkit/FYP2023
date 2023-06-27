@@ -13,10 +13,11 @@ namespace FYP_sale_book_system
 {
     
     public partial class procurement_check_purchase_order : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         private MySqlConnection conn;
         private int resultSYS;
+        procurement_manage_purchase_order manage_Purchase_Order;
 
         private int checkConnection(string mode)
         {
@@ -91,10 +92,11 @@ namespace FYP_sale_book_system
                 MessageBox.Show("Connection Error !!");
             }
         }
-        public procurement_check_purchase_order(string uIMode)
+        public procurement_check_purchase_order(procurement_manage_purchase_order manager_po, string uIMode)
         {
             InitializeComponent();
             this.UI_mode = uIMode;
+            this.manage_Purchase_Order = manager_po;
         }
 
         private void procurement_check_purchase_order_Load(object sender, EventArgs e)
@@ -111,7 +113,7 @@ namespace FYP_sale_book_system
                 this.resultSYS = checkConnection(this.UI_mode);
 
                 if (this.resultSYS == 1)
-                {
+                {   // select purchase order information
                     string SQL2 = "select company_Name,company_Phone,company_Address,supplier_Name,supplier_Phone,supplier_Address,book_total_price from purchase_order where purchase_order_no = '" + po_txt.Text + "';";
                     DataTable dt2 = new DataTable();
                     MySqlCommand cmd2 = new MySqlCommand(SQL2, conn);
@@ -156,6 +158,10 @@ namespace FYP_sale_book_system
                 MessageBox.Show("Connection Error !!");
             }
             }
+            else
+            {
+                MessageBox.Show("Please select purchase order number!!");
+            }
         }
 
         private void clear_btn_Click(object sender, EventArgs e)
@@ -175,6 +181,11 @@ namespace FYP_sale_book_system
         {
             po_txt.Items.Clear();
             Close();
+        }
+
+        private void po_txt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

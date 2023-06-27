@@ -317,12 +317,28 @@ namespace FYP_sale_book_system
 
         private void button2_Click_1(object sender, EventArgs e)//btn_RefashTAccountList
         {
-            ReviewFunction();
+            reflesh();
         }
-       
+        private void reflesh() {
+            ReviewFunction();
+            ReviewTAccountD();
+        }
+
         private void button1_Click(object sender, EventArgs e)//Create T Account
         {
-            CreateTAccount();
+            if (txt_Title.Text.Length != 0 && comb_AccountType.Text != "Account Type" && comb_Y.Text != "YYYY" && comb_M.Text != "MM")
+            {
+                CreateTAccount();
+                comb_TAccountNameD.Items.Clear();
+
+                ReviewFunction();
+                comb_TAccountNameD.Text = "T Account Name";
+                reflesh();
+            }
+            else {
+                MessageBox.Show("Please check Title, Ledger and Date!");
+            }
+            
         }
 
         private void btn_DeleteTAccount_Click(object sender, EventArgs e)
@@ -331,6 +347,10 @@ namespace FYP_sale_book_system
             if (name != " T Account Name" || name.Length != 0)
             {
                 DropTAccount(name);
+                comb_TAccountNameD.Items.Clear(); 
+                ReviewFunction();
+                comb_TAccountNameD.Text = "T Account Name";
+                reflesh();
             }
             else {
                 MessageBox.Show("Please select T Account Name !");
@@ -345,6 +365,11 @@ namespace FYP_sale_book_system
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void comb_TAccountNameD_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

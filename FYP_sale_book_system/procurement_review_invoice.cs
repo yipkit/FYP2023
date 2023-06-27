@@ -12,12 +12,13 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_review_invoice : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         int location_id = 0;
         string status = "";
         private MySqlConnection conn;
         private int resultSYS;
+        procurement_review_record review_record;
         private int checkConnection(string mode)
         {
             if (mode == "Normal Mode")
@@ -68,10 +69,11 @@ namespace FYP_sale_book_system
             }
 
         }
-        public procurement_review_invoice(string uIMode)
+        public procurement_review_invoice(procurement_review_record record,string uIMode)
         {
             InitializeComponent();
             this.UI_mode = uIMode;
+            this.review_record = record;
         }
 
         private void procurement_review_invoice_Load(object sender, EventArgs e)
@@ -86,12 +88,14 @@ namespace FYP_sale_book_system
 
         private void enter_btn_Click(object sender, EventArgs e)
         {
-            this.resultSYS = 0;
+            if (invoice_no_txt.Text != "")
+            {
+                this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
-                int x = Convert.ToInt32(invoice_no_txt.Text);
+                {     //display invoice information
+                    int x = Convert.ToInt32(invoice_no_txt.Text);
                 string SQL = "select comp_LocationID,supplier_name,supplier_address,invoice_date,remark from invoice_record where invoice_no = "+x+";";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
@@ -161,6 +165,11 @@ namespace FYP_sale_book_system
                 MessageBox.Show("Connection Error !!");
             }
         }
+            else
+            {
+                MessageBox.Show("Please select invoice number!!");
+            }
+}
 
         private void close_Click(object sender, EventArgs e)
         {
@@ -169,7 +178,7 @@ namespace FYP_sale_book_system
         }
 
         private void clear_btn_Click(object sender, EventArgs e)
-        {
+        {   //restart value
             invoice_no_txt.ResetText();
             r_date_txt.Clear();
             c_name_txt.Clear();

@@ -33,6 +33,9 @@ namespace FYP_sale_book_system
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.c_f_date_txt = new System.Windows.Forms.DateTimePicker();
             this.CreateSalesStockFrom_groupBox = new System.Windows.Forms.GroupBox();
+            this.procure_stock_btn = new System.Windows.Forms.Button();
+            this.location_id_txt = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.gen_form_btn = new System.Windows.Forms.Button();
             this.show_stock_take_form_btn = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
@@ -43,9 +46,6 @@ namespace FYP_sale_book_system
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.location_id_txt = new System.Windows.Forms.ComboBox();
-            this.procure_stock_btn = new System.Windows.Forms.Button();
             this.CreateSalesStockFrom_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -78,6 +78,33 @@ namespace FYP_sale_book_system
             this.CreateSalesStockFrom_groupBox.TabIndex = 60;
             this.CreateSalesStockFrom_groupBox.TabStop = false;
             this.CreateSalesStockFrom_groupBox.Text = "Create Sales Stock Take  Form";
+            // 
+            // procure_stock_btn
+            // 
+            this.procure_stock_btn.Location = new System.Drawing.Point(240, 159);
+            this.procure_stock_btn.Name = "procure_stock_btn";
+            this.procure_stock_btn.Size = new System.Drawing.Size(172, 23);
+            this.procure_stock_btn.TabIndex = 64;
+            this.procure_stock_btn.Text = "Show Procurement Stock";
+            this.procure_stock_btn.UseVisualStyleBackColor = true;
+            this.procure_stock_btn.Click += new System.EventHandler(this.procure_stock_btn_Click);
+            // 
+            // location_id_txt
+            // 
+            this.location_id_txt.FormattingEnabled = true;
+            this.location_id_txt.Location = new System.Drawing.Point(78, 77);
+            this.location_id_txt.Name = "location_id_txt";
+            this.location_id_txt.Size = new System.Drawing.Size(121, 20);
+            this.location_id_txt.TabIndex = 63;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(64, 12);
+            this.label2.TabIndex = 62;
+            this.label2.Text = "Location ID:";
             // 
             // gen_form_btn
             // 
@@ -171,33 +198,6 @@ namespace FYP_sale_book_system
             this.label1.Size = new System.Drawing.Size(110, 12);
             this.label1.TabIndex = 64;
             this.label1.Text = "Company Information";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 12);
-            this.label2.TabIndex = 62;
-            this.label2.Text = "Location ID:";
-            // 
-            // location_id_txt
-            // 
-            this.location_id_txt.FormattingEnabled = true;
-            this.location_id_txt.Location = new System.Drawing.Point(78, 77);
-            this.location_id_txt.Name = "location_id_txt";
-            this.location_id_txt.Size = new System.Drawing.Size(121, 20);
-            this.location_id_txt.TabIndex = 63;
-            // 
-            // procure_stock_btn
-            // 
-            this.procure_stock_btn.Location = new System.Drawing.Point(240, 159);
-            this.procure_stock_btn.Name = "procure_stock_btn";
-            this.procure_stock_btn.Size = new System.Drawing.Size(172, 23);
-            this.procure_stock_btn.TabIndex = 64;
-            this.procure_stock_btn.Text = "Show Procurement Stock";
-            this.procure_stock_btn.UseVisualStyleBackColor = true;
-            this.procure_stock_btn.Click += new System.EventHandler(this.procure_stock_btn_Click);
             // 
             // procurement_stock_take_form
             // 

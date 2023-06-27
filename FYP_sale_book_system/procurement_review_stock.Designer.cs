@@ -142,7 +142,7 @@ namespace FYP_sale_book_system
             this.Controls.Add(this.label4);
             this.Controls.Add(this.dataGridView1);
             this.Name = "procurement_review_stock";
-            this.Text = "procurement_review_stock";
+            this.Text = "Procurement Review Stock";
             this.Load += new System.EventHandler(this.procurement_review_stock_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

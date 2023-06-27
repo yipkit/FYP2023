@@ -17,7 +17,7 @@ namespace FYP_sale_book_system
         private int resultSYS;
         private string sql;
         private MySqlConnection conn;
-        private PassPersonalData PPD = new PassPersonalData();
+        
         private int checkConnection(string mode)
         {
             if (mode == "Normal Mode")
@@ -38,22 +38,12 @@ namespace FYP_sale_book_system
         private string runSQLCount(string sql,string staffid, string mode)
         {
 
-
-
-
             PassPersonalData PPD = new PassPersonalData();
             MySqlCommand cmd = new MySqlCommand(sql, this.conn);
             MySqlDataReader myData = cmd.ExecuteReader();
             myData.Read();
             string result = myData.GetString(0);
             return result;
-            
-            
-
-
-
-
-
 
         }
 

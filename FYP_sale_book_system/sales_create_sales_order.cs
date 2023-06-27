@@ -497,7 +497,8 @@ namespace FYP_sale_book_system
         {
             GenOrder gen = new GenOrder();
             string GO = gen.genorder(txt_TotalPrice.Text, this.UILocation, this.UIStaffID);
-            sales_Payment SP = new sales_Payment(GO,this.totalprice,this.UIMode, this.UILocation);
+            
+            sales_Payment SP = new sales_Payment(GO,this.totalprice,this.UIMode, this.UILocation, "0");
 
             //Create Customer Order
             NCCO(GO);

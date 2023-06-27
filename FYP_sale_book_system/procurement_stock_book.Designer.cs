@@ -411,7 +411,7 @@ namespace FYP_sale_book_system
             this.Controls.Add(this.close_btn);
             this.Controls.Add(this.display_list);
             this.Name = "procurement_stock_book";
-            this.Text = "procurement_stock_book";
+            this.Text = "Procurement Stock Book";
             this.Load += new System.EventHandler(this.procurement_stock_book_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

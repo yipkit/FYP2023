@@ -12,12 +12,12 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class sales_re_order : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         private MySqlConnection conn;
         private int resultSYS;
-
         private int count = 0;
+        ErrorControl check = new ErrorControl();
 
         private int checkConnection(string mode)
         {
@@ -161,7 +161,7 @@ namespace FYP_sale_book_system
                 if (this.resultSYS == 1)
                 {
 
-                    string SQL1 = "select SNID from salestock";
+                    string SQL1 = "select SNID from salestock where phasing_out_status = 'No'";
                     DataTable dt1 = new DataTable();
                     MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
                     MySqlDataReader myData1 = cmd1.ExecuteReader();
@@ -276,7 +276,8 @@ namespace FYP_sale_book_system
 
         private void search_btn_Click(object sender, EventArgs e)
         {
-            this.resultSYS = 0;
+            if (snid_txt.Text!=""&&location_id_txt.Text!="") {
+                this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
@@ -284,7 +285,7 @@ namespace FYP_sale_book_system
                 Int64 data1 = Convert.ToInt64(snid_txt.Text);
                 int data2 = Convert.ToInt32(location_id_txt.Text);
 
-                //display re-order info
+                //display sale stock information
                 string SQL = "select * from salestock where SNID='" + data1 + "' and comp_LocationID=" + data2 + ";";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
@@ -295,10 +296,15 @@ namespace FYP_sale_book_system
             }
             else
             {
-                MessageBox.Show("Please select Ref No. and Location ID!!");
+                MessageBox.Show("Connection Error !!");
             }
             snid_txt.ResetText();
             location_id_txt.ResetText();
+            }
+            else { 
+                MessageBox.Show("Please select SNID and Location ID!!"); 
+            }
+            
         }
 
         private void close_Click(object sender, EventArgs e)
@@ -312,7 +318,7 @@ namespace FYP_sale_book_system
 
         private void add_item_Click(object sender, EventArgs e)
         {
-            try
+            if(snid1_txt.Text!=""&&location_txt.Text!=""&& check.checkNUM(item_qty_txt.Text))
             {
                 this.resultSYS = 0;
                 this.resultSYS = checkConnection(this.UI_mode);
@@ -327,12 +333,12 @@ namespace FYP_sale_book_system
                     int location = Convert.ToInt32(location_txt.Text);
                     int order_data = Convert.ToInt32(re_order_no_txt.Text);
 
-                    //add data to database
+                   
                     string info_data = "SNID : " + snid1_txt.Text + ", Book name : " + item_name +
                                    ", Qty : " + item_qty_txt.Text + ", Date : " + date_data + ",\n Location : " + location_txt.Text;
 
                     re_order_list.Items.Add(info_data);
-
+                          //create re-order
                     string SQL2 = "insert into sale_Re_order values(" + "null," + order_data + "," + location + "," + snid_data + ",'" +
                                                                 item_name + "'," + qty_data + ",'" +date_data+ "','pending');";
                     DataTable dt1 = new DataTable();
@@ -350,7 +356,7 @@ namespace FYP_sale_book_system
                     MessageBox.Show("Connection Error !!");
                 }
             }
-            catch (Exception c)
+            else
             {
 
                 MessageBox.Show("Please check the data again !!");

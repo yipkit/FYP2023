@@ -29,12 +29,10 @@ namespace FYP_sale_book_system
         /// </summary>
         private void InitializeComponent()
         {
-            this.label10 = new System.Windows.Forms.Label();
             this.close = new System.Windows.Forms.Button();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.supplier_txt = new System.Windows.Forms.ComboBox();
             this.snid_txt = new System.Windows.Forms.ComboBox();
-            this.output_display = new System.Windows.Forms.TextBox();
             this.s_address1_txt = new System.Windows.Forms.TextBox();
             this.s_dept_txt = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -68,15 +66,6 @@ namespace FYP_sale_book_system
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(103, 423);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(43, 12);
-            this.label10.TabIndex = 62;
-            this.label10.Text = "Output :";
             // 
             // close
             // 
@@ -114,15 +103,6 @@ namespace FYP_sale_book_system
             this.snid_txt.Size = new System.Drawing.Size(121, 20);
             this.snid_txt.TabIndex = 57;
             this.snid_txt.SelectedIndexChanged += new System.EventHandler(this.snid_txt_SelectedIndexChanged);
-            // 
-            // output_display
-            // 
-            this.output_display.BackColor = System.Drawing.SystemColors.Info;
-            this.output_display.Location = new System.Drawing.Point(182, 413);
-            this.output_display.Name = "output_display";
-            this.output_display.ReadOnly = true;
-            this.output_display.Size = new System.Drawing.Size(509, 22);
-            this.output_display.TabIndex = 56;
             // 
             // s_address1_txt
             // 
@@ -235,6 +215,7 @@ namespace FYP_sale_book_system
             this.qty_txt.Name = "qty_txt";
             this.qty_txt.Size = new System.Drawing.Size(100, 22);
             this.qty_txt.TabIndex = 47;
+            this.qty_txt.TextChanged += new System.EventHandler(this.qty_txt_TextChanged);
             // 
             // item_name_txt
             // 
@@ -393,12 +374,10 @@ namespace FYP_sale_book_system
             this.Controls.Add(this.supplier_id_txt);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.company_id_txt);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.close);
             this.Controls.Add(this.dataGridView2);
             this.Controls.Add(this.supplier_txt);
             this.Controls.Add(this.snid_txt);
-            this.Controls.Add(this.output_display);
             this.Controls.Add(this.s_address1_txt);
             this.Controls.Add(this.s_dept_txt);
             this.Controls.Add(this.label11);
@@ -435,13 +414,10 @@ namespace FYP_sale_book_system
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button close;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.ComboBox supplier_txt;
         private System.Windows.Forms.ComboBox snid_txt;
-        private System.Windows.Forms.TextBox output_display;
         private System.Windows.Forms.TextBox s_address1_txt;
         private System.Windows.Forms.TextBox s_dept_txt;
         private System.Windows.Forms.Label label11;

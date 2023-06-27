@@ -126,18 +126,19 @@ namespace FYP_sale_book_system
             // 
             this.department.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.department.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.department.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.department.Font = new System.Drawing.Font("新細明體", 12F);
             this.department.FormattingEnabled = true;
             this.department.Location = new System.Drawing.Point(566, 131);
             this.department.Name = "department";
             this.department.Size = new System.Drawing.Size(121, 24);
             this.department.TabIndex = 8;
-            this.department.Text = "Department";
             // 
             // LoginMode
             // 
             this.LoginMode.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.LoginMode.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.LoginMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LoginMode.Font = new System.Drawing.Font("新細明體", 12F);
             this.LoginMode.FormattingEnabled = true;
             this.LoginMode.Items.AddRange(new object[] {
@@ -147,7 +148,6 @@ namespace FYP_sale_book_system
             this.LoginMode.Name = "LoginMode";
             this.LoginMode.Size = new System.Drawing.Size(121, 24);
             this.LoginMode.TabIndex = 9;
-            this.LoginMode.Text = "Select Mode";
             // 
             // label_LoginMode
             // 
@@ -163,13 +163,13 @@ namespace FYP_sale_book_system
             // 
             this.comboBox_location.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.comboBox_location.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBox_location.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_location.Font = new System.Drawing.Font("新細明體", 12F);
             this.comboBox_location.FormattingEnabled = true;
             this.comboBox_location.Location = new System.Drawing.Point(288, 246);
             this.comboBox_location.Name = "comboBox_location";
             this.comboBox_location.Size = new System.Drawing.Size(399, 24);
             this.comboBox_location.TabIndex = 11;
-            this.comboBox_location.Text = "Select LocationID";
             this.comboBox_location.SelectedIndexChanged += new System.EventHandler(this.comboBox_location_SelectedIndexChanged);
             // 
             // label_Location
@@ -190,6 +190,7 @@ namespace FYP_sale_book_system
             this.btn_Help.TabIndex = 13;
             this.btn_Help.Text = "Help, I can\'t sign";
             this.btn_Help.UseVisualStyleBackColor = true;
+            this.btn_Help.Click += new System.EventHandler(this.btn_Help_Click);
             // 
             // Staff_Login_UI
             // 

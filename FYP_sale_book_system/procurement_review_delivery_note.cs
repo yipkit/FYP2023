@@ -12,12 +12,13 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_review_delivery_note : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         int location_id = 0;
         string status = "";
         private MySqlConnection conn;
         private int resultSYS;
+        procurement_review_record review_record;
         private int checkConnection(string mode)
         {
             if (mode == "Normal Mode")
@@ -69,10 +70,11 @@ namespace FYP_sale_book_system
             }
 
         }
-        public procurement_review_delivery_note(string uIMode)
+        public procurement_review_delivery_note(procurement_review_record record, string uIMode)
         {
             InitializeComponent();
             this.UI_mode = uIMode;
+            this.review_record = record;
         }
 
         private void procurement_review_delivery_note_Load(object sender, EventArgs e)
@@ -82,11 +84,12 @@ namespace FYP_sale_book_system
 
         private void enter_btn_Click(object sender, EventArgs e)
         {
+            if (delivery_note_no_txt.Text!="") {
             this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
+            {   //display delivery note information
                 int x = Convert.ToInt32(delivery_note_no_txt.Text);
                 string SQL = "select comp_LocationID,supplier_name,supplier_address,delivery_note_date,remark from delivery_note_record where delivery_note_no = " + x + ";";
                 DataTable dt = new DataTable();
@@ -160,10 +163,16 @@ namespace FYP_sale_book_system
             {
                 MessageBox.Show("Connection Error !!");
             }
+            }
+            else
+            {
+                MessageBox.Show("Please select delivery note number!!");
+            }
+
         }
 
         private void clear_btn_Click(object sender, EventArgs e)
-        {
+        {   //restart value
             delivery_note_no_txt.ResetText();
             r_date_txt.Clear();
             c_name_txt.Clear();

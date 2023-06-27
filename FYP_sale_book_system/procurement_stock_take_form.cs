@@ -12,10 +12,11 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_stock_take_form : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         private MySqlConnection conn;
         private int resultSYS;
+        procurement_manage_stock_take stock_Take;
 
         private int checkConnection(string mode)
         {
@@ -161,10 +162,11 @@ namespace FYP_sale_book_system
             }
         }
 
-        public procurement_stock_take_form(string uIMode)
+        public procurement_stock_take_form(procurement_manage_stock_take manage_Stock_Take, string uIMode)
         {
             InitializeComponent();
             this.UI_mode = uIMode;
+            this.stock_Take = manage_Stock_Take;
         }
 
         private void procurement_stock_take_form_Load(object sender, EventArgs e)
@@ -180,7 +182,7 @@ namespace FYP_sale_book_system
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
+            {    //display stock take list information
                 string SQL = "select * from procurement_stock_take;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
@@ -202,8 +204,8 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                string SQL = "select procure_stock_id,comp_LocationID , SNID,bookname,book_qty,book_stockLv, authors_name as AuthorsName,language,category,detail ,book_date " +
-                          "from procurementstock p, authors a,languages l,category c where p.authors_id=a.authors_id and p.languages_id=l.languages_id and p.category_id = c.category_id;";
+                string SQL = "select procure_stock_id 'Stock ID', SNID,bookname 'Book Name',book_qty 'Qty',book_stockLv 'Stock Level', authors_name 'AuthorsName',language,category,detail ,book_date 'In Date',p.comp_LocationID 'Location ID',comp_Name 'Company Name' " +
+                      "from procurementstock p, authors a,languages l,category c,company comp where p.comp_LocationID = comp.comp_LocationID and p.authors_id=a.authors_id and p.languages_id=l.languages_id and p.category_id = c.category_id ;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -229,6 +231,7 @@ namespace FYP_sale_book_system
 
       private void gen_form_btn_Click(object sender, EventArgs e)
         {
+            if (location_id_txt.Text!="") { 
             int location_id = Convert.ToInt32(location_id_txt.Text);
             this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
@@ -255,7 +258,7 @@ namespace FYP_sale_book_system
 
                     if (this.resultSYS == 1)
                     {
-                        //input
+                        //input item information
                         string SQL = "insert into procurement_stock_take values(" + "null," + Convert.ToInt32(stock_take_form_no_txt.Text) + "," + Convert.ToInt64(myData2.GetValue(0)) + ",'" + myData2.GetValue(1) + "'," + "null" + "," + "'1990-01-01'" + "," +
                                        "'NULL'"+ "," + Convert.ToInt64(myData2.GetValue(0)) + ",'" + myData2.GetValue(1) + "'," + myData2.GetValue(2) + ",'" +sql_date+ "','" + myData2.GetValue(4) + "'," + myData2.GetValue(5) +",'"+c_f_date_txt.Text+"');";
                         DataTable dt = new DataTable();
@@ -280,6 +283,11 @@ namespace FYP_sale_book_system
             MessageBox.Show("Stock Take Form Number "+stock_take_form_no_txt.Text+" Created");
             stock_take_form_no_txt.Clear();
             location_id_txt.ResetText();
+            }
+            else { 
+                MessageBox.Show("Please select location ID !!"); 
+            }
+           
         }
 
         private void close_btn_Click(object sender, EventArgs e)
@@ -289,7 +297,7 @@ namespace FYP_sale_book_system
         }
 
         private void procure_stock_btn_Click(object sender, EventArgs e)
-        {
+        {   //display procurement stock information
             procurement_stock();
         }
     }

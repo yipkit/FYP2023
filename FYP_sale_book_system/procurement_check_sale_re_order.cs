@@ -12,10 +12,11 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_check_sale_re_order : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         private MySqlConnection conn;
         private int resultSYS;
+        procurement_edit_stock_function edit_stock;
 
         private int checkConnection(string mode)
         {
@@ -39,7 +40,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                string SQL = "select * from sale_Re_order;";
+                string SQL = "select sale_re_order_id 'Sale Re-Order ID', sale_re_order_no 'Sale Re-Order No',comp_LocationID 'Location ID',SNID ,book_name 'Book Name',book_qty 'Qty',re_order_date 'Re-Order Date',re_order_status 'Status' from sale_Re_order;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -136,7 +137,7 @@ namespace FYP_sale_book_system
                 {
 
 
-                    string SQL1 = "select SNID from procurementstock";
+                    string SQL1 = "select SNID from procurementstock where phasing_out_status = 'No';";
                     DataTable dt1 = new DataTable();
                     MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
                     MySqlDataReader myData1 = cmd1.ExecuteReader();
@@ -162,10 +163,11 @@ namespace FYP_sale_book_system
             }
 
         }
-        public procurement_check_sale_re_order(string uIMode)
+        public procurement_check_sale_re_order(procurement_edit_stock_function edit_Stock, string uIMode)
         {
             InitializeComponent();
             this.UI_mode = uIMode;
+            this.edit_stock = edit_Stock;
         }
 
        private void procurement_check_sale_re_order_Load(object sender, EventArgs e)
@@ -221,7 +223,7 @@ namespace FYP_sale_book_system
                     this.resultSYS = checkConnection(this.UI_mode);
 
                     if (this.resultSYS == 1)
-                    {
+                    {    //update procurement stock's product QTY
                         string SQL = "update procurementstock set book_qty = book_qty-" + qty_data + " where SNID = " + snid_data + ";";
                         DataTable dt = new DataTable();
                         MySqlCommand cmd = new MySqlCommand(SQL, conn);
@@ -238,9 +240,7 @@ namespace FYP_sale_book_system
 
                     if (this.resultSYS == 1)
                     {
-                        //string SQL2 = "insert into stockbook values(" + "null,'" + invoice_data + "','" + dept_data + "','" + "N/A" + "','" + "N/A" + "','" + "N/A" + "','" +
-                                                                 //date_data + "','" + time_data + "','" + "Normal" + "','" + snid_data + "','" + item_name_data + "'," + qty_data + ",'" + "OUT" + "');";
-
+                       //update stock book information
                        string SQL2 = "insert into procurement_stock_book values(" + "null," + 1 + ",'" + invoice_data + "','" + dept_data + "','" + "NULL" + "','" + "NULL" + "','" +
                                                       date_data + "','" + time_data + "','" + "Normal" + "','" + snid_data + "','" + item_name_data + "'," + qty_data + ",'" + "OUT" + "');";
                     DataTable dt2 = new DataTable();
@@ -284,7 +284,7 @@ namespace FYP_sale_book_system
                     
 
 
-                    //check inventory stock
+                    //check procurement stock
                     if (check_qty_data < check_stock_lv_data)
                         {
                             if (check_qty_data < 0)
@@ -304,15 +304,6 @@ namespace FYP_sale_book_system
                         MessageBox.Show("Connection Error !!");
                     }
                 
-                
-            }
-
-           catch (Exception c)
-            {
-
-                MessageBox.Show("Please check the data again !!");
-
-           }
             MessageBox.Show("Sale Re Order no "+re_order_no_txt.Text+ " is completed");
             re_order_id_txt.ResetText();
             snid_txt.Clear();
@@ -322,6 +313,15 @@ namespace FYP_sale_book_system
             time_txt.Clear();
             location_id_txt.Clear();
             gen_time();
+            }
+
+           catch (Exception c)
+            {
+
+                MessageBox.Show("Please check the data again !!");
+
+           }
+        
 
 
         }
@@ -364,7 +364,7 @@ namespace FYP_sale_book_system
         }
 
         private void show_re_order_Click(object sender, EventArgs e)
-        {
+        {   //display sale re-order information
             sale_re_order_info();
         }
 
@@ -374,8 +374,8 @@ namespace FYP_sale_book_system
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
-                string SQL = "select * from procurementstock;";
+            {   //display procurement stock information
+                string SQL = "select procure_stock_id 'Stock ID', SNID,bookname 'Book Name',book_qty 'Qty',book_stockLv 'Stock Level',book_date 'In Date',p.comp_LocationID 'Location ID',comp_Name 'Company Name' from procurementstock p, company comp where p.comp_LocationID = comp.comp_LocationID and phasing_out_status = 'No';";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -399,11 +399,12 @@ namespace FYP_sale_book_system
 
         private void complete_btn_Click(object sender, EventArgs e)
         {
+            if (re_order_txt.Text!="") {  
             this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
+            {    //change sale re-order status
                 string SQL = "update sale_Re_order set re_order_status = '"+ "Complete" + "' where sale_re_order_id = "+Convert.ToInt32(re_order_txt.Text)+ ";";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
@@ -415,10 +416,16 @@ namespace FYP_sale_book_system
                 MessageBox.Show("Connection Error !!");
             }
             re_order_txt.ResetText();
+            }
+            else
+            {
+                MessageBox.Show("Data is not complete!!");
+            }
+
         }
 
         private void restart_btn_Click_1(object sender, EventArgs e)
-        {
+        {    //restart value
             re_order_id_txt.ResetText();
             snid_txt.Clear();
             qty_txt.Clear();
@@ -437,11 +444,11 @@ namespace FYP_sale_book_system
 
         private void Search_btn_Click(object sender, EventArgs e)
         {
-            this.resultSYS = 0;
+            if (snid1_txt.Text != "") { this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
+            {   //search book information
                 string SQL = "select * from procurementstock where SNID = " + Convert.ToInt64(snid1_txt.Text) + ";";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
@@ -454,6 +461,12 @@ namespace FYP_sale_book_system
             {
                 MessageBox.Show("Connection Error !!");
             }
+            }
+            else
+            {
+                MessageBox.Show("Data is not complete!!");
+            }
+
         }
     }
 }

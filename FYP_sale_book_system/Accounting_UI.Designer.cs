@@ -37,8 +37,10 @@ namespace FYP_sale_book_system
             this.btn_EditTAccount = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btn_DataAnalysis = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // logout_btn
@@ -66,16 +68,16 @@ namespace FYP_sale_book_system
             this.groupBox1.Controls.Add(this.pur_order_approval_btn);
             this.groupBox1.Location = new System.Drawing.Point(61, 114);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(174, 298);
+            this.groupBox1.Size = new System.Drawing.Size(174, 84);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Function";
+            this.groupBox1.Text = "Decision Function";
             // 
             // pur_order_approval_btn
             // 
-            this.pur_order_approval_btn.Location = new System.Drawing.Point(6, 21);
+            this.pur_order_approval_btn.Location = new System.Drawing.Point(6, 34);
             this.pur_order_approval_btn.Name = "pur_order_approval_btn";
-            this.pur_order_approval_btn.Size = new System.Drawing.Size(150, 23);
+            this.pur_order_approval_btn.Size = new System.Drawing.Size(162, 23);
             this.pur_order_approval_btn.TabIndex = 0;
             this.pur_order_approval_btn.Text = "Purchase Order Approval";
             this.pur_order_approval_btn.UseVisualStyleBackColor = true;
@@ -105,9 +107,9 @@ namespace FYP_sale_book_system
             // 
             this.groupBox2.Controls.Add(this.create_t_account_btn);
             this.groupBox2.Controls.Add(this.btn_EditTAccount);
-            this.groupBox2.Location = new System.Drawing.Point(391, 114);
+            this.groupBox2.Location = new System.Drawing.Point(61, 204);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(170, 112);
+            this.groupBox2.Size = new System.Drawing.Size(174, 84);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Account Management";
@@ -115,12 +117,23 @@ namespace FYP_sale_book_system
             // 
             // groupBox3
             // 
-            this.groupBox3.Location = new System.Drawing.Point(391, 274);
+            this.groupBox3.Controls.Add(this.btn_DataAnalysis);
+            this.groupBox3.Location = new System.Drawing.Point(61, 294);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(170, 100);
+            this.groupBox3.Size = new System.Drawing.Size(174, 100);
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Data Analysis";
+            // 
+            // btn_DataAnalysis
+            // 
+            this.btn_DataAnalysis.Location = new System.Drawing.Point(14, 44);
+            this.btn_DataAnalysis.Name = "btn_DataAnalysis";
+            this.btn_DataAnalysis.Size = new System.Drawing.Size(150, 23);
+            this.btn_DataAnalysis.TabIndex = 0;
+            this.btn_DataAnalysis.Text = " Data Analysis";
+            this.btn_DataAnalysis.UseVisualStyleBackColor = true;
+            this.btn_DataAnalysis.Click += new System.EventHandler(this.btn_DataAnalysis_Click);
             // 
             // Accounting_UI
             // 
@@ -137,6 +150,7 @@ namespace FYP_sale_book_system
             this.Load += new System.EventHandler(this.Accounting_UI_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -152,5 +166,6 @@ namespace FYP_sale_book_system
         private System.Windows.Forms.Button btn_EditTAccount;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btn_DataAnalysis;
     }
 }

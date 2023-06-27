@@ -78,6 +78,75 @@ namespace FYP_sale_book_system
 
 
         }
+
+        private void switchTask(string mode)
+        {
+            this.resultSYS = 0;
+            this.resultSYS = checkConnection(mode);
+            string helperID = "";
+            string st = "";
+
+            int a = TaskInfo.SelectedIndex;
+            if (a != -1)
+            {
+                Tag1.Text = TaskInfo.Items[a].ToString();
+            }
+            st = Tag1.Text;
+            for (int x = 5; x <= st.Length - 1; x++)
+            {
+
+                if (st[x] == '|')
+                {
+
+                    break;
+                }
+                else
+                {
+                    helperID += st[x];
+                }
+            }
+
+            string Nsql = "update  HelperTask set TaskStatus = 1 where HelperID = '" + helperID + "';";
+            Console.WriteLine(Nsql);
+            MySqlCommand cmd = new MySqlCommand(Nsql, this.conn);
+            MySqlDataReader myData = cmd.ExecuteReader();
+        }
+
+        private void checkTask(string mode)
+        {
+
+            this.resultSYS = 0;
+            this.resultSYS = checkConnection(mode);
+            string Nsql;
+            if (this.resultSYS == 1)//TaskStatus: 1 is finished 0 is non-finish  UserType: 1 is customer 0 is staff
+            {
+                Nsql = "SELECT * FROM HelperTask where UserType = 0 && TaskStatus = 0;";
+            }
+            else
+            {
+                Nsql = "SELECT * FROM HelperTask where UserType = 0 && TaskStatus = 0;";
+            }
+
+            MySqlCommand cmd = new MySqlCommand(Nsql, this.conn);
+            MySqlDataReader myData = cmd.ExecuteReader();
+            TaskInfo.Items.Clear();
+            while (myData.Read())
+            {
+
+                string ID = myData["HelperID"].ToString();
+                string status = myData["TaskStatus"].ToString();
+                string TType = myData["TaskType"].ToString();
+                string EM = myData["Email"].ToString();
+                string UT = myData["UserType"].ToString();
+                string RM = myData["Remark"].ToString();
+                string MessageData = "ID : " + ID + "| E mail : " + EM + " Status(1 = finished 0 = non-finish) " + status + " Task Type : " + TType + " | Remark : " + RM;
+                TaskInfo.Items.Add(MessageData);
+
+
+
+            }
+
+        }
         private void runDataGV2(string sql)
         {
             MySqlCommand cmd = new MySqlCommand(sql, this.conn);
@@ -104,7 +173,7 @@ namespace FYP_sale_book_system
             string Nsql;
             if (this.resultSYS == 1 || this.resultSYS == 0)
             {
-                Nsql = "Select staff_ID'Staff ID',Dept_ID'Department ID',staffName'Name',staffPost'Post',staffRightLevel'Right Level',staffEmail'E-mail',staffLoginLocationID'Login LocationID', staffLoginTime'Login Time',staffLogoutTime'Logout Time',staffStatus'Status',Dept_Name'Department Name',staffJobType'Job Type',staff_Salary'Salary',Education_Level'Education Level' from staff where staff_ID = '" + this.staffid + "'  ORDER BY staff_ID DESC LIMIT 1;";
+                Nsql = "Select staff_ID'Staff ID',staffPassword'Staff Password',Dept_ID'Department ID',staffName'Name',staffPost'Post',staffRightLevel'Right Level',staffEmail'E-mail',staffLoginLocationID'Login LocationID', staffLoginTime'Login Time',staffLogoutTime'Logout Time',staffStatus'Status',Dept_Name'Department Name',staffJobType'Job Type',staff_Salary'Salary',Education_Level'Education Level' from staff where staff_ID = '" + this.staffid + "'  ORDER BY staff_ID DESC LIMIT 1;";
                 runDataGV2(Nsql);
             }
 
@@ -120,7 +189,7 @@ namespace FYP_sale_book_system
             string Nsql;
             if (this.resultSYS == 1 || this.resultSYS == 0)
             {
-                Nsql = "Select staff_ID'Staff ID',Dept_ID'Department ID',staffName'Name',staffPost'Post',staffRightLevel'Right Level',staffEmail'E-mail',staffLoginLocationID'Login LocationID', staffLoginTime'Login Time',staffLogoutTime'Logout Time',staffStatus'Status',Dept_Name'Department Name',staffJobType'Job Type',staff_Salary'Salary',Education_Level'Education Level' from staff  order by staff_ID DESC;";
+                Nsql = "Select staff_ID'Staff ID',staffPassword'Staff Password',Dept_ID'Department ID',staffName'Name',staffPost'Post',staffRightLevel'Right Level',staffEmail'E-mail',staffLoginLocationID'Login LocationID', staffLoginTime'Login Time',staffLogoutTime'Logout Time',staffStatus'Status',Dept_Name'Department Name',staffJobType'Job Type',staff_Salary'Salary',Education_Level'Education Level' from staff  order by staff_ID DESC;";
                 runDataGV2(Nsql);
             }
             
@@ -196,6 +265,7 @@ namespace FYP_sale_book_system
             InitializeComponent();
             this.UIMode = mode;
             CountCompData();
+            checkTask(this.UIMode);
         }
 
         private void it_update_user_account_Load(object sender, EventArgs e)
@@ -308,6 +378,8 @@ namespace FYP_sale_book_system
                 searchStaffData();
                 this.staffid = "";
             }
+            switchTask(this.UIMode);
+            checkTask(this.UIMode);
         }
 
         private string UpdateInformation() {
@@ -551,6 +623,11 @@ namespace FYP_sale_book_system
 
 
 
+        }
+
+        private void btn_RefreshData_Click(object sender, EventArgs e)
+        {
+            checkTask(this.UIMode);
         }
     }
 }

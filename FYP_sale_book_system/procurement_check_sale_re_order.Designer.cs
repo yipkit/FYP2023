@@ -100,7 +100,7 @@ namespace FYP_sale_book_system
             // re_order_id_txt
             // 
             this.re_order_id_txt.FormattingEnabled = true;
-            this.re_order_id_txt.Location = new System.Drawing.Point(146, 26);
+            this.re_order_id_txt.Location = new System.Drawing.Point(141, 21);
             this.re_order_id_txt.Name = "re_order_id_txt";
             this.re_order_id_txt.Size = new System.Drawing.Size(121, 20);
             this.re_order_id_txt.TabIndex = 17;
@@ -208,6 +208,7 @@ namespace FYP_sale_book_system
             // 
             // snid1_txt
             // 
+            this.snid1_txt.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.snid1_txt.FormattingEnabled = true;
             this.snid1_txt.Location = new System.Drawing.Point(6, 40);
             this.snid1_txt.Name = "snid1_txt";
@@ -407,7 +408,7 @@ namespace FYP_sale_book_system
             this.Controls.Add(this.close_btn);
             this.Controls.Add(this.groupBox1);
             this.Name = "procurement_check_sale_re_order";
-            this.Text = "procurement_check_sale_re_order";
+            this.Text = "procurement Check Sale Re-Order";
             this.Load += new System.EventHandler(this.procurement_check_sale_re_order_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.groupBox3.ResumeLayout(false);

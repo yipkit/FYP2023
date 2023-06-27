@@ -62,13 +62,13 @@ namespace FYP_sale_book_system
             this.in_date_txt = new System.Windows.Forms.DateTimePicker();
             this.close_btn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.location_id_btn = new System.Windows.Forms.Button();
             this.supplier_info_btn = new System.Windows.Forms.Button();
             this.language_info_btn = new System.Windows.Forms.Button();
             this.e_book_info_btn = new System.Windows.Forms.Button();
             this.category_info_btn = new System.Windows.Forms.Button();
             this.author_info_btn = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.location_id_btn = new System.Windows.Forms.Button();
             this.clean_value_btn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -196,7 +196,7 @@ namespace FYP_sale_book_system
             // 
             this.book_name_txt.Location = new System.Drawing.Point(316, 24);
             this.book_name_txt.Name = "book_name_txt";
-            this.book_name_txt.Size = new System.Drawing.Size(121, 22);
+            this.book_name_txt.Size = new System.Drawing.Size(135, 22);
             this.book_name_txt.TabIndex = 15;
             // 
             // label8
@@ -212,8 +212,9 @@ namespace FYP_sale_book_system
             // 
             this.qty_txt.Location = new System.Drawing.Point(316, 59);
             this.qty_txt.Name = "qty_txt";
-            this.qty_txt.Size = new System.Drawing.Size(121, 22);
+            this.qty_txt.Size = new System.Drawing.Size(135, 22);
             this.qty_txt.TabIndex = 17;
+            this.qty_txt.TextChanged += new System.EventHandler(this.qty_txt_TextChanged);
             // 
             // label9
             // 
@@ -228,7 +229,7 @@ namespace FYP_sale_book_system
             // 
             this.stock_lv_txt.Location = new System.Drawing.Point(316, 101);
             this.stock_lv_txt.Name = "stock_lv_txt";
-            this.stock_lv_txt.Size = new System.Drawing.Size(121, 22);
+            this.stock_lv_txt.Size = new System.Drawing.Size(135, 22);
             this.stock_lv_txt.TabIndex = 19;
             // 
             // label10
@@ -244,7 +245,7 @@ namespace FYP_sale_book_system
             // 
             this.unit_price_txt.Location = new System.Drawing.Point(316, 140);
             this.unit_price_txt.Name = "unit_price_txt";
-            this.unit_price_txt.Size = new System.Drawing.Size(121, 22);
+            this.unit_price_txt.Size = new System.Drawing.Size(135, 22);
             this.unit_price_txt.TabIndex = 21;
             // 
             // label11
@@ -269,7 +270,7 @@ namespace FYP_sale_book_system
             // 
             this.detail_txt.Location = new System.Drawing.Point(316, 202);
             this.detail_txt.Name = "detail_txt";
-            this.detail_txt.Size = new System.Drawing.Size(121, 22);
+            this.detail_txt.Size = new System.Drawing.Size(135, 22);
             this.detail_txt.TabIndex = 25;
             // 
             // label13
@@ -295,7 +296,7 @@ namespace FYP_sale_book_system
             this.status_txt.FormattingEnabled = true;
             this.status_txt.Location = new System.Drawing.Point(316, 236);
             this.status_txt.Name = "status_txt";
-            this.status_txt.Size = new System.Drawing.Size(121, 20);
+            this.status_txt.Size = new System.Drawing.Size(135, 20);
             this.status_txt.TabIndex = 26;
             // 
             // add_item_btn
@@ -366,6 +367,16 @@ namespace FYP_sale_book_system
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             // 
+            // location_id_btn
+            // 
+            this.location_id_btn.Location = new System.Drawing.Point(133, 20);
+            this.location_id_btn.Name = "location_id_btn";
+            this.location_id_btn.Size = new System.Drawing.Size(115, 23);
+            this.location_id_btn.TabIndex = 5;
+            this.location_id_btn.Text = "Location Information";
+            this.location_id_btn.UseVisualStyleBackColor = true;
+            this.location_id_btn.Click += new System.EventHandler(this.location_id_btn_Click);
+            // 
             // supplier_info_btn
             // 
             this.supplier_info_btn.Location = new System.Drawing.Point(533, 21);
@@ -425,16 +436,6 @@ namespace FYP_sale_book_system
             this.dataGridView1.Size = new System.Drawing.Size(963, 150);
             this.dataGridView1.TabIndex = 168;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // location_id_btn
-            // 
-            this.location_id_btn.Location = new System.Drawing.Point(133, 20);
-            this.location_id_btn.Name = "location_id_btn";
-            this.location_id_btn.Size = new System.Drawing.Size(115, 23);
-            this.location_id_btn.TabIndex = 5;
-            this.location_id_btn.Text = "Location Information";
-            this.location_id_btn.UseVisualStyleBackColor = true;
-            this.location_id_btn.Click += new System.EventHandler(this.location_id_btn_Click);
             // 
             // clean_value_btn
             // 

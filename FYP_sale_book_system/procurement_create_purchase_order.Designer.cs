@@ -39,6 +39,8 @@ namespace FYP_sale_book_system
             this.c_address_txt = new System.Windows.Forms.TextBox();
             this.c_phone_txt = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.location_id_txt = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
             this.show_supplier_btn = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.restart_btn = new System.Windows.Forms.Button();
@@ -54,6 +56,8 @@ namespace FYP_sale_book_system
             this.label13 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.snid_txt = new System.Windows.Forms.ComboBox();
+            this.date_txt = new System.Windows.Forms.DateTimePicker();
             this.unit_price_txt = new System.Windows.Forms.TextBox();
             this.item_total_price_txt = new System.Windows.Forms.TextBox();
             this.create = new System.Windows.Forms.Button();
@@ -67,11 +71,7 @@ namespace FYP_sale_book_system
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label9 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.location_id_txt = new System.Windows.Forms.ComboBox();
-            this.date_txt = new System.Windows.Forms.DateTimePicker();
             this.note = new System.Windows.Forms.ListBox();
-            this.snid_txt = new System.Windows.Forms.ComboBox();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -178,6 +178,25 @@ namespace FYP_sale_book_system
             this.groupBox4.TabIndex = 35;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Search";
+            // 
+            // location_id_txt
+            // 
+            this.location_id_txt.FormattingEnabled = true;
+            this.location_id_txt.Location = new System.Drawing.Point(287, 20);
+            this.location_id_txt.Name = "location_id_txt";
+            this.location_id_txt.Size = new System.Drawing.Size(121, 20);
+            this.location_id_txt.TabIndex = 33;
+            this.location_id_txt.SelectedIndexChanged += new System.EventHandler(this.location_id_txt_SelectedIndexChanged);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.label17.Location = new System.Drawing.Point(209, 26);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(72, 12);
+            this.label17.TabIndex = 25;
+            this.label17.Text = "Company ID :";
             // 
             // show_supplier_btn
             // 
@@ -337,6 +356,24 @@ namespace FYP_sale_book_system
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Create Purchase order";
             // 
+            // snid_txt
+            // 
+            this.snid_txt.FormattingEnabled = true;
+            this.snid_txt.Location = new System.Drawing.Point(123, 83);
+            this.snid_txt.Name = "snid_txt";
+            this.snid_txt.Size = new System.Drawing.Size(121, 20);
+            this.snid_txt.TabIndex = 168;
+            this.snid_txt.SelectedIndexChanged += new System.EventHandler(this.snid_txt_SelectedIndexChanged);
+            // 
+            // date_txt
+            // 
+            this.date_txt.CustomFormat = "yy-MM-dd";
+            this.date_txt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.date_txt.Location = new System.Drawing.Point(301, 23);
+            this.date_txt.Name = "date_txt";
+            this.date_txt.Size = new System.Drawing.Size(135, 22);
+            this.date_txt.TabIndex = 167;
+            // 
             // unit_price_txt
             // 
             this.unit_price_txt.Location = new System.Drawing.Point(131, 125);
@@ -452,34 +489,6 @@ namespace FYP_sale_book_system
             this.label9.TabIndex = 37;
             this.label9.Text = "Note";
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.ImageAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.label17.Location = new System.Drawing.Point(209, 26);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(72, 12);
-            this.label17.TabIndex = 25;
-            this.label17.Text = "Company ID :";
-            // 
-            // location_id_txt
-            // 
-            this.location_id_txt.FormattingEnabled = true;
-            this.location_id_txt.Location = new System.Drawing.Point(287, 20);
-            this.location_id_txt.Name = "location_id_txt";
-            this.location_id_txt.Size = new System.Drawing.Size(121, 20);
-            this.location_id_txt.TabIndex = 33;
-            this.location_id_txt.SelectedIndexChanged += new System.EventHandler(this.location_id_txt_SelectedIndexChanged);
-            // 
-            // date_txt
-            // 
-            this.date_txt.CustomFormat = "yy-MM-dd";
-            this.date_txt.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.date_txt.Location = new System.Drawing.Point(301, 23);
-            this.date_txt.Name = "date_txt";
-            this.date_txt.Size = new System.Drawing.Size(135, 22);
-            this.date_txt.TabIndex = 167;
-            // 
             // note
             // 
             this.note.ForeColor = System.Drawing.SystemColors.WindowText;
@@ -491,15 +500,6 @@ namespace FYP_sale_book_system
             this.note.ScrollAlwaysVisible = true;
             this.note.Size = new System.Drawing.Size(471, 76);
             this.note.TabIndex = 38;
-            // 
-            // snid_txt
-            // 
-            this.snid_txt.FormattingEnabled = true;
-            this.snid_txt.Location = new System.Drawing.Point(123, 83);
-            this.snid_txt.Name = "snid_txt";
-            this.snid_txt.Size = new System.Drawing.Size(121, 20);
-            this.snid_txt.TabIndex = 168;
-            this.snid_txt.SelectedIndexChanged += new System.EventHandler(this.snid_txt_SelectedIndexChanged);
             // 
             // procurement_create_purchase_order
             // 

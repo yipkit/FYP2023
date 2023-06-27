@@ -1254,6 +1254,7 @@ namespace FYP_sale_book_system
             this.comb_TAccountNameD.Size = new System.Drawing.Size(287, 20);
             this.comb_TAccountNameD.TabIndex = 148;
             this.comb_TAccountNameD.Text = "T Account Name";
+            this.comb_TAccountNameD.SelectedIndexChanged += new System.EventHandler(this.comb_TAccountNameD_SelectedIndexChanged);
             // 
             // label1
             // 

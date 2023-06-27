@@ -38,6 +38,7 @@ namespace FYP_sale_book_system
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btn_ResetDutyRecord = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btn_CreateCustomerData = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.label2 = new System.Windows.Forms.Label();
@@ -60,7 +61,6 @@ namespace FYP_sale_book_system
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btn_CreateCustomerData = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -98,6 +98,8 @@ namespace FYP_sale_book_system
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "User Account Management";
+            this.groupBox1.Visible = false;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // update_user_account_btn
             // 
@@ -138,6 +140,8 @@ namespace FYP_sale_book_system
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Duty Management (Please make sure no our users use the system)";
+            this.groupBox2.Visible = false;
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
             // btn_ResetDutyRecord
             // 
@@ -159,6 +163,18 @@ namespace FYP_sale_book_system
             this.groupBox3.TabIndex = 6;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Customer Account Management";
+            this.groupBox3.Visible = false;
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
+            // 
+            // btn_CreateCustomerData
+            // 
+            this.btn_CreateCustomerData.Location = new System.Drawing.Point(6, 51);
+            this.btn_CreateCustomerData.Name = "btn_CreateCustomerData";
+            this.btn_CreateCustomerData.Size = new System.Drawing.Size(325, 23);
+            this.btn_CreateCustomerData.TabIndex = 1;
+            this.btn_CreateCustomerData.Text = "Create Customer Data";
+            this.btn_CreateCustomerData.UseVisualStyleBackColor = true;
+            this.btn_CreateCustomerData.Click += new System.EventHandler(this.btn_CreateCustomerData_Click);
             // 
             // button1
             // 
@@ -361,16 +377,6 @@ namespace FYP_sale_book_system
             this.label3.Size = new System.Drawing.Size(95, 12);
             this.label3.TabIndex = 9;
             this.label3.Text = "Now Temperature :";
-            // 
-            // btn_CreateCustomerData
-            // 
-            this.btn_CreateCustomerData.Location = new System.Drawing.Point(6, 51);
-            this.btn_CreateCustomerData.Name = "btn_CreateCustomerData";
-            this.btn_CreateCustomerData.Size = new System.Drawing.Size(325, 23);
-            this.btn_CreateCustomerData.TabIndex = 1;
-            this.btn_CreateCustomerData.Text = "Create Customer Data";
-            this.btn_CreateCustomerData.UseVisualStyleBackColor = true;
-            this.btn_CreateCustomerData.Click += new System.EventHandler(this.btn_CreateCustomerData_Click);
             // 
             // it_UI
             // 

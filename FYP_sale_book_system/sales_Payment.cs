@@ -11,6 +11,7 @@ using System.Linq;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 
+
 namespace FYP_sale_book_system
 {
     public partial class sales_Payment : Form
@@ -21,9 +22,7 @@ namespace FYP_sale_book_system
         private MySqlConnection conn; // call connDB
         private string UIStaffID;
         private string UIMode;
-        private string UILevel;
-        private string UIPost;
-        private string UIdutyID;
+        private string UIOrderMode;
         private string UIKEY;
         private string UILocation;
         private int resultSYS;
@@ -45,7 +44,9 @@ namespace FYP_sale_book_system
         //Price
         string totalprice = "0";
         private string AmountNUM = "";
+        
 
+        
         private int checkConnection(string mode)
         {
 
@@ -63,6 +64,9 @@ namespace FYP_sale_book_system
 
 
         }
+
+        
+
         private void UpdateCodeStatus(string GO, string DiscountCode)
         {
             this.resultSYS = 0;
@@ -88,7 +92,7 @@ namespace FYP_sale_book_system
             data = myData.GetString(0);
             return data;
         }
-        public sales_Payment(string GO, string totalprice, string mode,string Location)
+        public sales_Payment(string GO, string totalprice, string mode,string Location,string OrderMode)
         {
             InitializeComponent();
             txt_TotalPrice.Text = totalprice;
@@ -97,7 +101,7 @@ namespace FYP_sale_book_system
             groupBox3.Visible = false;
             txt_Amount.Text = totalprice;
             this.UILocation = Location;
-
+            this.UIOrderMode = OrderMode;
         }
 
         private void btn_Close_Click(object sender, EventArgs e)
@@ -113,28 +117,109 @@ namespace FYP_sale_book_system
 
         private void btn_Enter_Click(object sender, EventArgs e)//PartA
         {
+            ErrorControl ec = new ErrorControl();
             string TotalP = txt_TotalPrice.Text;
             string TotalD = txt_DiscountNUM.Text;
             string TotalA = txt_Amount.Text;
-            if (this.SMode == 1)
+            if (ec.checkTextboxNULL(txt_Return.Text) == true || this.SMode == 1)
             {
-
-                int gatewaycode = CheckCCNandGenGateway();
-                
-                
-                if (gatewaycode != 0)
+                if (ec.checkTextboxNULL(comb_CN.Text) == true && (combMF.Text == "M" || combMF.Text == "F"))
                 {
-                    SMode1Payment(TotalP,TotalD,TotalA, gatewaycode);
+                    if (this.SMode == 1)
+                    {
+
+                        int gatewaycode = CheckCCNandGenGateway();
+
+
+                        if (gatewaycode != 0)
+                        {
+                            SMode1Payment(TotalP, TotalD, TotalA, gatewaycode);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please Check Data!");
+                        }
+                    }
+                    if (this.SMode == 2)
+                    {
+                        SMode2Payment(TotalP, TotalD, TotalA);
+
+                    }
+                    string GOS = this.UIKEY;
+                    if (this.UIOrderMode == "0")
+                    {
+                        Close();
+                    }
+                    else if (this.UIOrderMode == "1")
+                    {
+
+
+
+                        //call gen e book
+                        getGC(GOS);
+                        sale_gen_Ebook_link gen_link = new sale_gen_Ebook_link(this.UIMode, GOS, "1");
+                        gen_link.ShowDialog();
+                        Close();
+                    }
+                    else if (this.UIOrderMode == "2")
+                    {
+                        getGC(GOS);
+                        Close();
+
+                    }
+                    else if (this.UIOrderMode == "3")
+                    {
+
+                        sale_gen_Ebook_link gen_link = new sale_gen_Ebook_link(this.UIMode, GOS, "1");
+                        gen_link.ShowDialog();
+                        Close();
+                        //call gen e book
+                    }
+                    else if (this.UIOrderMode == "4")
+                    {
+                        Close();
+                    }
                 }
-                else {
-                    MessageBox.Show("Please Check Data!");
+                else
+                {
+                    MessageBox.Show("Please check information");
                 }
             }
-            if(this.SMode == 2 ){
-                SMode2Payment(TotalP, TotalD, TotalA);
+            else {
+                MessageBox.Show("Please input the amount into Calculator");
             }
             
+            
+
+            
+
         }
+
+        private void AddGiftCardsPoint(string GO,string customerID, string point) {
+            this.resultSYS = 0;
+            this.resultSYS = checkConnection(this.UIMode);
+            string sql = "update customer set c_EPoint = c_EPoint +'" + point+"' where customer_ID = '"+customerID+"';";
+            UpdateSQL(sql);
+        }
+
+        private void getGC(string GO) {
+            int count = 0;
+            this.resultSYS = 0;
+            this.resultSYS = checkConnection(this.UIMode);
+            string sql = "Select GiftsCard, GiftsCard_Qty, GiftsCard_customerID from customerorder where GenOrder ='" + GO+ "' && GiftsCard != 'Null' ;";
+            MySqlCommand cmd = new MySqlCommand(sql, this.conn);
+            MySqlDataReader myData = cmd.ExecuteReader();
+            while(myData.Read()){
+                int point = Convert.ToInt32( myData["GiftsCard"].ToString());
+                int qty = Convert.ToInt32( myData["GiftsCard_Qty"].ToString());
+                string totalpoint = (point* qty).ToString();
+                string customerID = myData["GiftsCard_customerID"].ToString();
+
+                AddGiftCardsPoint(GO, customerID, totalpoint);
+                
+            }
+        }
+        
 
         private void RA_CreditCardPayment_CheckedChanged(object sender, EventArgs e)
         {
@@ -310,7 +395,7 @@ namespace FYP_sale_book_system
                 {
                     UpdateSQL(sql);
                     comb_SDM.Items.Clear();
-                    Close();
+                    
                 }
                 catch (Exception e)
                 {
@@ -342,7 +427,7 @@ namespace FYP_sale_book_system
                 {
                     UpdateSQL(sql);
                     comb_SDM.Items.Clear();
-                    Close();
+                    
                 }
                 catch (Exception e)
                 {
@@ -446,16 +531,19 @@ namespace FYP_sale_book_system
         private void button_9_Click(object sender, EventArgs e)
         {
             AmountNUM += "9";
+            txt_CustomerAmount.Text = AmountNUM;
         }
 
         private void button_6_Click(object sender, EventArgs e)
         {
-            AmountNUM += "9";
+            AmountNUM += "6";
+            txt_CustomerAmount.Text = AmountNUM;
         }
 
         private void button_3_Click(object sender, EventArgs e)
         {
-            AmountNUM += "9";
+            AmountNUM += "3";
+            txt_CustomerAmount.Text = AmountNUM;
         }
 
         private void button_AC_Click(object sender, EventArgs e)
@@ -463,6 +551,11 @@ namespace FYP_sale_book_system
             txt_CustomerAmount.Text = "";
             txt_Return.Text = "";
             AmountNUM = "";
+
+        }
+
+        private void comb_CN_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

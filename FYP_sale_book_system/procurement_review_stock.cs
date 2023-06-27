@@ -12,45 +12,16 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_review_stock : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         private MySqlConnection conn;//Location: connectDB.cs
         //private
         private int selection;
         private int resultSYS;
         private int count = 0;
+        procurement_review_stock_function review_Stock;
 
 
-       /* public static MySqlConnection connDB2()
-        {
-
-            string host = "localhost";
-            string user = "root";
-            string pwd = "exia0721";
-            string databaseName = "database_version1";
-
-            string connStr = "server=" + host + ";uid=" + user + ";pwd=" + pwd + ";database=" + databaseName;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
-            {
-                switch (ex.Number)
-                {
-                    case 0:
-                        Console.WriteLine("無法連線到資料庫.");
-                        break;
-                    case 1045:
-                        Console.WriteLine("使用者帳號或密碼錯誤,請再試一次.");
-                        break;
-                }
-            }
-            return conn;
-        }*/
-
-   
 
         private int checkConnection(string mode)
         {
@@ -79,7 +50,7 @@ namespace FYP_sale_book_system
                 {
 
 
-                    string SQL1 = "select SNID from procurementstock";
+                    string SQL1 = "select SNID from procurementstock where phasing_out_status = 'No';";
                     DataTable dt1 = new DataTable();
                     MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
                     MySqlDataReader myData1 = cmd1.ExecuteReader();
@@ -180,10 +151,11 @@ namespace FYP_sale_book_system
 
    
        
-            public procurement_review_stock(string uIMode)
+            public procurement_review_stock(procurement_review_stock_function review_Stock_Function, string uIMode)
             {
                 InitializeComponent();
                this.UI_mode = uIMode;
+               this.review_Stock = review_Stock_Function;
         }
 
             private void procurement_review_stock_Load(object sender, EventArgs e)
@@ -194,34 +166,42 @@ namespace FYP_sale_book_system
             }
 
             private void search_btn_Click(object sender, EventArgs e)
+        {
+            if (snid_txt.Text != "")
             {
-            this.resultSYS = 0;
-            this.resultSYS = checkConnection(this.UI_mode);
+                this.resultSYS = 0;
+                this.resultSYS = checkConnection(this.UI_mode);
 
-            if (this.resultSYS == 1)
-            {
+                if (this.resultSYS == 1)
+                {
 
-                Int64 data1 = Convert.ToInt64(snid_txt.Text);
+                    Int64 data1 = Convert.ToInt64(snid_txt.Text);
 
+                    //search item
 
-           
-                    string SQL = "select * from procurementstock where SNID=" + data1 + ";";
+                    string SQL = "select procure_stock_id, SNID,bookname,book_qty,book_stockLv, authors_name as AuthorsName,language,category,detail ,book_date, phasing_out_status,p.comp_LocationID,comp_Name " +
+                          "from procurementstock p, authors a,languages l,category c,company comp where p.comp_LocationID = comp.comp_LocationID and p.authors_id=a.authors_id and p.languages_id=l.languages_id and p.category_id = c.category_id and SNID=" + data1 + ";";
                     DataTable dt = new DataTable();
                     MySqlCommand cmd = new MySqlCommand(SQL, conn);
                     MySqlDataReader myData = cmd.ExecuteReader();
                     dt.Load(myData);
                     dataGridView1.DataSource = dt;
-                conn.Close();
-                snid_txt.ResetText();
+                    conn.Close();
+                    snid_txt.ResetText();
                 }
                 else
                 {
                     MessageBox.Show("Connection Error !!");
                 }
             }
+            else
+            {
+                MessageBox.Show("Please select SNID!!");
+            }
+            }
 
         private void restart_btn_Click(object sender, EventArgs e)
-        {
+        {   //restart value
             dataGridView1.Columns.Clear();
         }
 

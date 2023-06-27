@@ -12,10 +12,12 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_stock_take : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         private MySqlConnection conn;
         private int resultSYS;
+        ErrorControl check = new ErrorControl();
+        procurement_manage_stock_take stock_Take;
 
         private int checkConnection(string mode)
         {
@@ -77,10 +79,11 @@ namespace FYP_sale_book_system
 
 
         }
-        public procurement_stock_take(string uIMode)
+        public procurement_stock_take(procurement_manage_stock_take manage_Stock_Take, string uIMode)
         {
             InitializeComponent();
             this.UI_mode = uIMode;
+            this.stock_Take = manage_Stock_Take;
         }
 
         private void procurement_stock_take_Load(object sender, EventArgs e)
@@ -91,7 +94,7 @@ namespace FYP_sale_book_system
 
         private void update_btn_Click(object sender, EventArgs e)
         {
-            try
+            if(check.checkNUM(stocktake_id_txt.Text)&& check.checkNUM(qty_txt.Text))
             {
                 int stock_take_qty = Convert.ToInt32(qty_txt.Text);
                 string date_data = date_txt.Text;
@@ -101,12 +104,12 @@ namespace FYP_sale_book_system
                 this.resultSYS = checkConnection(this.UI_mode);
 
                 if (this.resultSYS == 1)
-                {
+                {   //record stock take information
                     string SQL1 = "update procurement_stock_take set stock_take_qty =" + stock_take_qty + ", stock_take_date ='" + date_data + "', stock_take_details='" + remark + "' where stock_take_id = " + Convert.ToInt32(stocktake_id_txt.Text) + ";";
                     DataTable dt1 = new DataTable();
                     MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
                     MySqlDataReader myData1 = cmd1.ExecuteReader();
-                    //insert into stockbook values(null,'abc1234','jack','N/A','N/A','22-06-01','21:20','defect','wf1000','sony tv',1,'IN');
+                    
                     conn.Close();
                 }
                 else
@@ -120,7 +123,7 @@ namespace FYP_sale_book_system
                 qty_txt.Clear();
                 remark_txt.Clear();
             }
-            catch (Exception a) {
+            else{
 
 
                 MessageBox.Show("Please check your data");
@@ -131,7 +134,7 @@ namespace FYP_sale_book_system
 
         private void stocktake_id_txt_TextChanged(object sender, EventArgs e)
         {
-            if (stocktake_id_txt.Text !="") {
+            if (stocktake_id_txt.Text !=""&& check.checkNUM(stocktake_id_txt.Text)) {
                 this.resultSYS = 0;
                 this.resultSYS = checkConnection(this.UI_mode);
 
@@ -166,13 +169,13 @@ namespace FYP_sale_book_system
 
         private void search_btn_Click(object sender, EventArgs e)
         {
-            if (stocktake_id_txt.Text != " ")
+            if (check.checkNUM(search_txt.Text))
             {
                 this.resultSYS = 0;
                 this.resultSYS = checkConnection(this.UI_mode);
 
                 if (this.resultSYS == 1)
-                {
+                {    //search stock take list
                     string SQL2 = "select stock_take_id 'Stock Take ID', stock_take_no 'Stock Take No', stock_take_SNID 'SNID',stock_take_name 'Book Name',stock_take_qty 'Stock Take Qty',stock_take_date 'Stock Take Date',stock_take_details 'Remark',location 'Location ID' from procurement_stock_take where stock_take_id =" + Convert.ToInt32(search_txt.Text) + ";";
                     DataTable dt2 = new DataTable();
                     MySqlCommand cmd2 = new MySqlCommand(SQL2, conn);
@@ -204,6 +207,11 @@ namespace FYP_sale_book_system
                     MessageBox.Show("Connection Error !!");
                 }
                 search_txt.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Please enter stock take ID !!");
+
             }
         }
 

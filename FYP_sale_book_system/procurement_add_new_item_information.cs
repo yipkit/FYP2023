@@ -12,10 +12,12 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_add_new_item_information : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         private MySqlConnection conn;
         private int resultSYS;
+        ErrorControl check = new ErrorControl();
+        procurement_edit_stock_function edit_stock;
 
         private int checkConnection(string mode)
         {
@@ -40,7 +42,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                string SQL = "select * from authors;";
+                string SQL = "select authors_id 'Authors ID',authors_name 'Authors Name' from authors;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -63,7 +65,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                string SQL = "select * from category;";
+                string SQL = "select category_id 'Category ID',category 'Category' ,detail 'Detail' from category;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -86,7 +88,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                string SQL = "select * from e_book;";
+                string SQL = "select e_book_id 'E-Book ID',e_book_SNID 'E-Book SNID',e_book_name 'E-Book Name', e_book_status 'E-Book Status',e_book_link 'E-Book Link', e_book_link_status 'E-Book Link Status',e_book_Price 'E-Book Price' from e_book;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -109,7 +111,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                string SQL = "select * from languages;";
+                string SQL = "select languages_id 'Languages ID', language 'Language' from languages;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -132,7 +134,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                string SQL = "select * from supplier;";
+                string SQL = "select supplier_id 'Supplier ID', supplier_name 'Supplier Name', supplier_address 'Supplier Address',supplier_phone 'Supplier Phone',supplier_dept 'Department',supplier_detail 'Detail' from supplier;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -169,10 +171,11 @@ namespace FYP_sale_book_system
             ebook_link_status_txt.Items.Add("Offline");
 
         }
-        public procurement_add_new_item_information(string uIMode)
+        public procurement_add_new_item_information(procurement_edit_stock_function edit_Stock, string uIMode)
         {
             InitializeComponent();
             this.UI_mode = uIMode;
+            this.edit_stock = edit_Stock;
         }
 
         private void procurement_add_new_item_information_Load(object sender, EventArgs e)
@@ -183,62 +186,68 @@ namespace FYP_sale_book_system
         }
 
         private void author_info_btn_Click(object sender, EventArgs e)
-        {
+        {   //display anthor information
             anthors_info();
         }
 
         private void category_info_btn_Click(object sender, EventArgs e)
-        {
+        {   //display category information
             category_info();
         }
 
         private void e_book_info_btn_Click(object sender, EventArgs e)
-        {
+        {   //display e-book information
             ebook_info();
         }
 
         private void language_info_btn_Click(object sender, EventArgs e)
-        {
+        {   //display language information
             language_info();
         }
 
         private void supplier_info_btn_Click(object sender, EventArgs e)
-        {
+        {    //display supplier information
             supplier_info();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.resultSYS = 0;
-            this.resultSYS = checkConnection(this.UI_mode);
+            if (author_name_txt.Text!="") {
+                this.resultSYS = 0;
+                this.resultSYS = checkConnection(this.UI_mode);
 
-            if (this.resultSYS == 1)
-            {
-                //input
-                string SQL = "insert into authors values(" + "null, '"+anthor_name_txt.Text+ "');";
-                DataTable dt = new DataTable();
-                MySqlCommand cmd = new MySqlCommand(SQL, conn);
-                MySqlDataReader myData = cmd.ExecuteReader();
-                dt.Load(myData);
-                dataGridView1.DataSource = dt;
-                conn.Close();
+                if (this.resultSYS == 1)
+                {
+                    //input author information
+                    string SQL = "insert into authors values(" + "null, '" + author_name_txt.Text + "');";
+                    DataTable dt = new DataTable();
+                    MySqlCommand cmd = new MySqlCommand(SQL, conn);
+                    MySqlDataReader myData = cmd.ExecuteReader();
+                    dt.Load(myData);
+                    dataGridView1.DataSource = dt;
+                    conn.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Connection Error !!");
+                }
+                MessageBox.Show("Author Name " + author_name_txt.Text + " Updated!!");
+                author_name_txt.Clear();
             }
-            else
-            {
-                MessageBox.Show("Connection Error !!");
+            else {
+                MessageBox.Show("Data is not complete!!");
             }
-            MessageBox.Show("Author Name "+anthor_name_txt.Text+" Updated!!");
-            anthor_name_txt.Clear();
         }
 
         private void update_category_btn_Click(object sender, EventArgs e)
         {
+            if (category_txt.Text!="" && category_detail_txt.Text!="") { 
             this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
             {
-                //input
+                //input category information
                 string SQL = "insert into category values(" + "null, '" + category_txt.Text+"','"+category_detail_txt.Text+ "');";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
@@ -255,16 +264,21 @@ namespace FYP_sale_book_system
             category_txt.Clear();
             category_detail_txt.Clear();
         }
+            else {
+                MessageBox.Show("Data is not complete!!");
+            }
+}
 
         private void update_ebook_btn_Click(object sender, EventArgs e)
         {
+            if (check.checkNUM(ebook_snid_txt.Text)&& ebook_name_txt.Text!="" && ebook_status_txt.Text != "" && ebook_link_txt.Text != "" && ebook_link_status_txt.Text != ""&& check.checkNUM(ebook_price_txt.Text)) { 
             this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
             {
-                //input
-                string SQL = "insert into e_book values(" + "null, " + Convert.ToInt64(ebook_snid_txt.Text) + ",'" + ebook_name_txt.Text +"','"+ebook_status_txt.Text+"','"+ebook_link_txt.Text+"','"+ebook_link_status_txt.Text+ "');";
+                //input e-book information
+                string SQL = "insert into e_book values(" + "null, " + Convert.ToInt64(ebook_snid_txt.Text) + ",'" + ebook_name_txt.Text +"','"+ebook_status_txt.Text+"','"+ebook_link_txt.Text+"','"+ebook_link_status_txt.Text+"',"+Convert.ToInt32(ebook_price_txt.Text)+");";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -282,16 +296,22 @@ namespace FYP_sale_book_system
             ebook_status_txt.ResetText();
             ebook_link_txt.Clear();
             ebook_link_status_txt.ResetText();
+            ebook_price_txt.Clear();
         }
+            else {
+                MessageBox.Show("Data is not complete!!");
+            }
+}
 
         private void update_language_btn_Click(object sender, EventArgs e)
         {
+            if (language_txt.Text!="") { 
             this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
             {
-                //input
+                //input language information
                 string SQL = "insert into languages values(" + "null, '" + language_txt.Text + "');";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
@@ -305,17 +325,22 @@ namespace FYP_sale_book_system
                 MessageBox.Show("Connection Error !!");
             }
             MessageBox.Show("Language " + language_txt.Text + " Updated!!");
-            language_txt.ResetText(); ;
+            language_txt.ResetText();
         }
+            else {
+                MessageBox.Show("Data is not complete!!");
+            }
+}
 
         private void update_suppier_btn_Click(object sender, EventArgs e)
         {
+            if (supplier_name_txt.Text!=""&& supplier_address_txt.Text!="" && check.checkNUM(supplier_phone_txt.Text) && supplier_dept_txt.Text != "" && supplier_detail_txt.Text != "") { 
             this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
             {
-                //input
+                //input supplier information
                 string SQL = "insert into supplier values(" + "null, '" +supplier_name_txt.Text+ "','" + supplier_address_txt.Text + "'," + Convert.ToInt32(supplier_phone_txt.Text) + ",'" +supplier_dept_txt.Text + "','" + supplier_detail_txt.Text + "');";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
@@ -335,6 +360,10 @@ namespace FYP_sale_book_system
             supplier_dept_txt.Clear();
             supplier_detail_txt.Clear();
         }
+            else {
+                MessageBox.Show("Data is not complete!!");
+            }
+}
 
         private void close_btn_Click(object sender, EventArgs e)
         {

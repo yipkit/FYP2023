@@ -214,6 +214,8 @@ namespace FYP_sale_book_system
             string sql1 = "Select T_Account_Name from T_Account_Credit where T_Account_Status = 1;";
             MySqlCommand cmd = new MySqlCommand(sql1, this.conn);
             MySqlDataReader myData = cmd.ExecuteReader();
+            comb_TAccountName.Items.Clear();
+            comb_TNameA.Items.Clear();
             while (myData.Read()) {
                 string data = myData.GetString(0);
                 comb_TAccountName.Items.Add(data);
@@ -227,12 +229,45 @@ namespace FYP_sale_book_system
             this.resultSYS = checkConnection(this.UIMode);
             string sql1 = "Select T_Account_Name from T_Account_Debit where T_Account_Status = 1;";
             MySqlCommand cmd = new MySqlCommand(sql1, this.conn);
-            MySqlDataReader myData = cmd.ExecuteReader();
+            MySqlDataReader myData = cmd.ExecuteReader(); 
+            comb_TAccountName.Items.Clear();
+            comb_TNameB.Items.Clear();
             while (myData.Read())
             {
                 string data =myData.GetString(0);
                 comb_TAccountName.Items.Add(data);
                 comb_TNameB.Items.Add(data);
+            }
+            this.conn.Close();
+        }//Modify
+        private void LoadTAccountCOMBOX_DModify()
+        {
+            this.resultSYS = 0;
+            this.resultSYS = checkConnection(this.UIMode);
+            string sql1 = "Select T_Account_Name from T_Account_Debit where T_Account_Status = 1;";
+            MySqlCommand cmd = new MySqlCommand(sql1, this.conn);
+            MySqlDataReader myData = cmd.ExecuteReader();
+            comb_TNameA.Items.Clear();
+            while (myData.Read())
+            {
+                string data = myData.GetString(0);
+                
+                comb_TNameA.Items.Add(data);
+            }
+            this.conn.Close();
+        }
+        private void LoadTAccountCOMBOX_CModify()
+        {
+            this.resultSYS = 0;
+            this.resultSYS = checkConnection(this.UIMode);
+            string sql1 = "Select T_Account_Name from T_Account_Credit where T_Account_Status = 1;";
+            MySqlCommand cmd = new MySqlCommand(sql1, this.conn);
+            MySqlDataReader myData = cmd.ExecuteReader();
+            while (myData.Read())
+            {
+                string data = myData.GetString(0);
+                
+                comb_TNameA.Items.Add(data);
             }
             this.conn.Close();
         }
@@ -283,6 +318,11 @@ namespace FYP_sale_book_system
         {
             this.MEDANDQ = false;
             groupBox3.Visible = false;
+            
+                
+            LoadTAccountCOMBOX_DModify();
+            LoadTAccountCOMBOX_CModify();
+            
         }
 
 
@@ -290,6 +330,10 @@ namespace FYP_sale_book_system
         {
             this.MEDANDQ = true;
             groupBox3.Visible = true;
+            LoadTAccountCOMBOX_C();
+            LoadTAccountCOMBOX_D();
+
+
 
         }
 
@@ -303,6 +347,8 @@ namespace FYP_sale_book_system
             this.MEDANDQ = false;
             groupBox3.Visible = false;
             txt_DescA.Text = "Balance C/D";
+            LoadTAccountCOMBOX_C();
+            LoadTAccountCOMBOX_D();
         }
 
         private void To_BalanceM_BD_CheckedChanged(object sender, EventArgs e)// Balance B/D
@@ -310,6 +356,65 @@ namespace FYP_sale_book_system
             this.MEDANDQ = false;
             groupBox3.Visible = false;
             txt_DescA.Text = "Balance B/D";
+            LoadTAccountCOMBOX_C();
+            LoadTAccountCOMBOX_D();
+        }
+
+        private void btn_ReviewCompanyOrder_Click(object sender, EventArgs e)
+        {
+            string title = comb_Title.Text;
+            string startDate = dateTimePicker_start.Text;
+            string endDate = dateTimePicker_End.Text;
+            if (title == "Staff Salary") 
+            {
+                ShowSalesOrder(1, startDate, endDate);
+            } else if (title == "Sales Stock") 
+            {
+                ShowSalesOrder(2, startDate, endDate);
+            }
+            else if (title == "Sales Order")
+            {
+                ShowSalesOrder(3, startDate, endDate);
+            }
+            else if (title == "Purchase Order")
+            {
+                ShowSalesOrder(4, startDate, endDate);
+            }
+            else
+            {
+                ShowSalesOrder(5, startDate, endDate);
+            }
+
+        }
+
+        private void ShowSalesOrder(int Ttype,string startDate, string endDate) {
+            this.resultSYS = 0;
+            this.resultSYS = checkConnection(this.UIMode);
+            string sql1 = "";
+            if (Ttype == 1)
+            {
+                sql1 = "SELECT staff_ID'staff ID',Dept_ID'Department ID',staffName'Staff Name',staff_Salary'Salary' FROM staff where staffStatus = 'Normal' or staffStatus = 'Locked';";
+            } 
+            else if (Ttype == 2) {
+                sql1 = "SELECT * FROM salestock where book_date between '"+startDate+ "' and '" + endDate + "';";
+            } 
+            else if (Ttype == 3) {
+                sql1 = "SELECT * FROM sale_order where sale_order_date between '" + startDate + "' and '" + endDate + "';";
+            }
+            else if (Ttype == 4) {
+                sql1 = "SELECT * FROM purchase_order where purchase_order_date between '" + startDate + "' and '" + endDate + "';";
+            }
+            else if (Ttype == 5) {
+                sql1 = "SELECT * FROM procurementstock where book_date between '" + startDate + "' and '" + endDate + "';";
+            }
+            Console.WriteLine(sql1);
+            MySqlCommand cmd = new MySqlCommand(sql1, this.conn);
+            MySqlDataReader myData = cmd.ExecuteReader();
+            DataTable dt = new DataTable();
+            dt.Load(myData);
+            dataGridView1.DataSource = dt;
+
+            this.conn.Close();
         }
     }
 }

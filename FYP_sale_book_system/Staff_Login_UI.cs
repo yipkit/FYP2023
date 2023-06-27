@@ -272,6 +272,7 @@ namespace FYP_sale_book_system
 
         private void login_btn_Click(object sender, EventArgs e)
         {
+            ErrorControl ec = new ErrorControl();
             string staffID = staff_id.Text;
             string Mode = LoginMode.Text;
             string dept = department.Text;
@@ -281,13 +282,14 @@ namespace FYP_sale_book_system
             
             //testing
             string KEY = GenKEY.GKEY();
-            if ("Select LocationID" == comboBox_location.Text) {
+            
+            if ("Select LocationID" == comboBox_location.Text || ec.checkTextboxNULL(comboBox_location.Text) ==false) {
                 MessageBox.Show("Please select LocationID !!");
             }
             else {
 
 
-                if (LoginMode.Text == "Normal Mode" || LoginMode.Text == "Development Mode")
+                if (LoginMode.Text == "Normal Mode" || LoginMode.Text == "Development Mode" )
                 {
                     if (department.Text == "Sales")
                     {
@@ -395,6 +397,12 @@ namespace FYP_sale_book_system
         private void comboBox_location_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_Help_Click(object sender, EventArgs e)
+        {
+            it_HelperTask Helper = new it_HelperTask();
+            Helper.Show();
         }
     }
 }

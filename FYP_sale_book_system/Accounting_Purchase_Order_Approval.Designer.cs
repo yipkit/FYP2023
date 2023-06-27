@@ -131,7 +131,7 @@ namespace FYP_sale_book_system
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.close_btn);
             this.Name = "Accounting_Purchase_Order_Approval";
-            this.Text = "Accounting_Purchase_Order_Approval";
+            this.Text = "Accounting Purchase Order Approval";
             this.Load += new System.EventHandler(this.Accounting_Purchase_Order_Approval_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

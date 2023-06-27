@@ -32,7 +32,8 @@ namespace FYP_sale_book_system
         private string UIMode;
         private string UILevel;
         private string UIPost;
-        private string UIdutyID;
+        private string UIStatus;
+        private string UIJOBTYPE;
         private string UIKEY;
         private int resultSYS;
         private string sql;
@@ -53,6 +54,33 @@ namespace FYP_sale_book_system
 
 
         }
+        private void checkHiddenGroupBox() {
+            if ((this.UIPost == "Manager" || Convert.ToInt32(this.UILevel) >= 3) && this.UIStatus == "Normal")//User Account Management
+            {
+                groupBox1.Visible = true;
+            }
+            else
+            {
+                groupBox1.Visible = false;
+            }
+            if ((this.UIPost == "Manager" || Convert.ToInt32(this.UILevel) >= 8) && this.UIStatus == "Normal")//Logout System And Reset Duty Record
+            {
+                groupBox2.Visible = true;
+            }
+            else
+            {
+                groupBox2.Visible = false;
+            }
+            if ((this.UIPost == "Manager" || Convert.ToInt32(this.UILevel) >= 5) && this.UIStatus == "Normal")// Customer Account Management
+            {
+                groupBox3.Visible = true;
+            }
+            else
+            {
+                groupBox3.Visible = false;
+            }
+        }
+
         private void runInsertOrUpdateSQL(String sql)
         {
             try {
@@ -151,7 +179,17 @@ namespace FYP_sale_book_system
             this.UIKEY = KEY;
             this.UILevel = CUR.checkRight(staffID, Mode);
             this.UIPost = CUR.checkPost(staffID, Mode);
+            this.UIStatus = PPD.checkPersonStatus(staffID, Mode);
+            this.UIJOBTYPE= PPD.checkPersonJobType(staffID,Mode);
             getWeather(this.UIMode);
+            Console.WriteLine("StaffID : "+staffID);
+            Console.WriteLine("Mode : " + this.UIMode);
+            Console.WriteLine("KEY : " + this.UIKEY);
+            Console.WriteLine("Level : " + this.UILevel);
+            Console.WriteLine("Post : " + this.UIPost);
+            Console.WriteLine("Status : " + this.UIStatus);
+            Console.WriteLine("JOB TYPE : " + this.UIJOBTYPE);
+            checkHiddenGroupBox();//Set Staff Right
         }
 
         private void logout_btn_Click(object sender, EventArgs e)
@@ -214,8 +252,11 @@ namespace FYP_sale_book_system
 
         private void button1_Click(object sender, EventArgs e)
         {
-            it_ModifyCustomerData MCD = new it_ModifyCustomerData();
-            MCD.Show();
+           
+        it_ModifyCustomerData MCD = new it_ModifyCustomerData(this.UIMode);
+        MCD.Show();
+            
+            
         }
 
         private void btn_CreateCustomerData_Click(object sender, EventArgs e)
@@ -223,5 +264,23 @@ namespace FYP_sale_book_system
             SalesAndIT_CreateCustomerAccount SAICCA = new SalesAndIT_CreateCustomerAccount(this.UIMode);
             SAICCA.ShowDialog();
         }
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void groupBox2_Enter(object sender, EventArgs e)
+        {
+
+           
+        }
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+            
+        }
+
+        
+
+        
     }
 }

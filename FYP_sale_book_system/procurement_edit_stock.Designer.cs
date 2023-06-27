@@ -47,9 +47,18 @@ namespace FYP_sale_book_system
             this.button1 = new System.Windows.Forms.Button();
             this.show_sale_stock_btn = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.update_status_btn = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.book_status_txt = new System.Windows.Forms.ComboBox();
+            this.snid_status_txt = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // sale_radioBtn
@@ -79,7 +88,7 @@ namespace FYP_sale_book_system
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 36);
+            this.label1.Location = new System.Drawing.Point(32, 26);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 12);
             this.label1.TabIndex = 2;
@@ -87,7 +96,7 @@ namespace FYP_sale_book_system
             // 
             // update_btn
             // 
-            this.update_btn.Location = new System.Drawing.Point(233, 85);
+            this.update_btn.Location = new System.Drawing.Point(227, 75);
             this.update_btn.Name = "update_btn";
             this.update_btn.Size = new System.Drawing.Size(75, 23);
             this.update_btn.TabIndex = 3;
@@ -98,14 +107,14 @@ namespace FYP_sale_book_system
             // snid_txt
             // 
             this.snid_txt.FormattingEnabled = true;
-            this.snid_txt.Location = new System.Drawing.Point(106, 33);
+            this.snid_txt.Location = new System.Drawing.Point(100, 23);
             this.snid_txt.Name = "snid_txt";
             this.snid_txt.Size = new System.Drawing.Size(121, 20);
             this.snid_txt.TabIndex = 4;
             // 
             // stock_lv_txt
             // 
-            this.stock_lv_txt.Location = new System.Drawing.Point(106, 85);
+            this.stock_lv_txt.Location = new System.Drawing.Point(100, 75);
             this.stock_lv_txt.Name = "stock_lv_txt";
             this.stock_lv_txt.Size = new System.Drawing.Size(121, 22);
             this.stock_lv_txt.TabIndex = 5;
@@ -113,7 +122,7 @@ namespace FYP_sale_book_system
             // location_id_txt
             // 
             this.location_id_txt.FormattingEnabled = true;
-            this.location_id_txt.Location = new System.Drawing.Point(106, 59);
+            this.location_id_txt.Location = new System.Drawing.Point(100, 49);
             this.location_id_txt.Name = "location_id_txt";
             this.location_id_txt.Size = new System.Drawing.Size(121, 20);
             this.location_id_txt.TabIndex = 8;
@@ -121,7 +130,7 @@ namespace FYP_sale_book_system
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 62);
+            this.label3.Location = new System.Drawing.Point(32, 52);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 12);
             this.label3.TabIndex = 7;
@@ -130,7 +139,7 @@ namespace FYP_sale_book_system
             // stock_lv_radioBtn
             // 
             this.stock_lv_radioBtn.AutoSize = true;
-            this.stock_lv_radioBtn.Location = new System.Drawing.Point(15, 88);
+            this.stock_lv_radioBtn.Location = new System.Drawing.Point(9, 78);
             this.stock_lv_radioBtn.Name = "stock_lv_radioBtn";
             this.stock_lv_radioBtn.Size = new System.Drawing.Size(81, 16);
             this.stock_lv_radioBtn.TabIndex = 9;
@@ -142,7 +151,7 @@ namespace FYP_sale_book_system
             // unit_price_radioBtn
             // 
             this.unit_price_radioBtn.AutoSize = true;
-            this.unit_price_radioBtn.Location = new System.Drawing.Point(15, 116);
+            this.unit_price_radioBtn.Location = new System.Drawing.Point(9, 106);
             this.unit_price_radioBtn.Name = "unit_price_radioBtn";
             this.unit_price_radioBtn.Size = new System.Drawing.Size(72, 16);
             this.unit_price_radioBtn.TabIndex = 11;
@@ -153,7 +162,7 @@ namespace FYP_sale_book_system
             // 
             // unit_price_txt
             // 
-            this.unit_price_txt.Location = new System.Drawing.Point(106, 113);
+            this.unit_price_txt.Location = new System.Drawing.Point(100, 103);
             this.unit_price_txt.Name = "unit_price_txt";
             this.unit_price_txt.Size = new System.Drawing.Size(121, 22);
             this.unit_price_txt.TabIndex = 10;
@@ -169,7 +178,7 @@ namespace FYP_sale_book_system
             // 
             // restart_btn
             // 
-            this.restart_btn.Location = new System.Drawing.Point(338, 85);
+            this.restart_btn.Location = new System.Drawing.Point(332, 75);
             this.restart_btn.Name = "restart_btn";
             this.restart_btn.Size = new System.Drawing.Size(75, 23);
             this.restart_btn.TabIndex = 13;
@@ -179,7 +188,7 @@ namespace FYP_sale_book_system
             // 
             // close_btn
             // 
-            this.close_btn.Location = new System.Drawing.Point(685, 25);
+            this.close_btn.Location = new System.Drawing.Point(713, 12);
             this.close_btn.Name = "close_btn";
             this.close_btn.Size = new System.Drawing.Size(75, 23);
             this.close_btn.TabIndex = 14;
@@ -191,7 +200,7 @@ namespace FYP_sale_book_system
             // 
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.show_sale_stock_btn);
-            this.groupBox1.Location = new System.Drawing.Point(419, 108);
+            this.groupBox1.Location = new System.Drawing.Point(517, 108);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(259, 46);
             this.groupBox1.TabIndex = 15;
@@ -222,41 +231,113 @@ namespace FYP_sale_book_system
             // 
             this.groupBox2.Controls.Add(this.sale_radioBtn);
             this.groupBox2.Controls.Add(this.procure_radioBtn);
-            this.groupBox2.Location = new System.Drawing.Point(248, 31);
+            this.groupBox2.Location = new System.Drawing.Point(242, 21);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(260, 43);
             this.groupBox2.TabIndex = 16;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Department";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.groupBox2);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Controls.Add(this.update_btn);
+            this.groupBox3.Controls.Add(this.snid_txt);
+            this.groupBox3.Controls.Add(this.restart_btn);
+            this.groupBox3.Controls.Add(this.stock_lv_txt);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.unit_price_radioBtn);
+            this.groupBox3.Controls.Add(this.location_id_txt);
+            this.groupBox3.Controls.Add(this.unit_price_txt);
+            this.groupBox3.Controls.Add(this.stock_lv_radioBtn);
+            this.groupBox3.Location = new System.Drawing.Point(9, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(508, 136);
+            this.groupBox3.TabIndex = 17;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Edit Item Price and Stock Level";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.update_status_btn);
+            this.groupBox4.Controls.Add(this.label4);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.book_status_txt);
+            this.groupBox4.Controls.Add(this.snid_status_txt);
+            this.groupBox4.Location = new System.Drawing.Point(523, 6);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(184, 100);
+            this.groupBox4.TabIndex = 18;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Edit Item Status";
+            // 
+            // update_status_btn
+            // 
+            this.update_status_btn.Location = new System.Drawing.Point(76, 68);
+            this.update_status_btn.Name = "update_status_btn";
+            this.update_status_btn.Size = new System.Drawing.Size(75, 23);
+            this.update_status_btn.TabIndex = 9;
+            this.update_status_btn.Text = "Update";
+            this.update_status_btn.UseVisualStyleBackColor = true;
+            this.update_status_btn.Click += new System.EventHandler(this.update_status_btn_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 48);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(38, 12);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Status :";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(34, 12);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "SNID:";
+            // 
+            // book_status_txt
+            // 
+            this.book_status_txt.FormattingEnabled = true;
+            this.book_status_txt.Location = new System.Drawing.Point(57, 42);
+            this.book_status_txt.Name = "book_status_txt";
+            this.book_status_txt.Size = new System.Drawing.Size(121, 20);
+            this.book_status_txt.TabIndex = 1;
+            // 
+            // snid_status_txt
+            // 
+            this.snid_status_txt.FormattingEnabled = true;
+            this.snid_status_txt.Location = new System.Drawing.Point(57, 16);
+            this.snid_status_txt.Name = "snid_status_txt";
+            this.snid_status_txt.Size = new System.Drawing.Size(121, 20);
+            this.snid_status_txt.TabIndex = 0;
+            // 
             // procurement_edit_stock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.close_btn);
-            this.Controls.Add(this.restart_btn);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.unit_price_radioBtn);
-            this.Controls.Add(this.unit_price_txt);
-            this.Controls.Add(this.stock_lv_radioBtn);
-            this.Controls.Add(this.location_id_txt);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.stock_lv_txt);
-            this.Controls.Add(this.snid_txt);
-            this.Controls.Add(this.update_btn);
-            this.Controls.Add(this.label1);
             this.Name = "procurement_edit_stock";
-            this.Text = "procurement_edit_stock";
+            this.Text = "Procurement Edit Stock";
             this.Load += new System.EventHandler(this.procurement_edit_stock_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -280,5 +361,12 @@ namespace FYP_sale_book_system
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button show_sale_stock_btn;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button update_status_btn;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox book_status_txt;
+        private System.Windows.Forms.ComboBox snid_status_txt;
     }
 }

@@ -18,6 +18,15 @@ namespace FYP_sale_book_system
                 Application.Exit();
             }
         }
+
+        public void checkDataDate(string data) {
+                            
+        }
+
+        public void checkDataTime(string data) { 
+            
+        }
+
         public Boolean checkTime(string hours_in, string hours_out, string mins_in, string mins_out)
         {
             if (hours_in == "Hours" || hours_out == "Hours" || mins_in == "Mins" || mins_out == "Mins")
@@ -31,6 +40,22 @@ namespace FYP_sale_book_system
             }
         }
 
+        public Boolean checkEmail(string Email) {
+            int size = Email.Length;
+            int count = 0;
+            for (int x = 0;x<= size-1 ; x++) {
+                if (Email[x] == '@') {
+                    count++;
+                }
+            }
+            if (count == 1)
+            {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
 
         public Boolean checkTimeIN(string hours_in, string mins_in)
         {

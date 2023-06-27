@@ -12,11 +12,13 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_create_purchase_order : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         private MySqlConnection conn;
         private int resultSYS;
         int count=0;
+        ErrorControl check = new ErrorControl();
+        procurement_manage_purchase_order manage_Purchase_Order;
 
         private void po_info() {
 
@@ -25,7 +27,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                string SQL = "select * from purchase_order;";
+                string SQL = "select purchase_order_id 'P.O ID',company_LocationID 'Location ID',company_Name 'Company Name',company_Phone 'Company Phone',company_address 'Company Address',purchase_order_no 'P.O. No',purchase_order_date 'Create Date',SNID ,book_name 'Book Name', book_qty 'Qty',book_unit_price 'Unit Price',book_total_price 'Total Price',supplier_id 'Supplier ID',supplier_Name 'Supplier Name',supplier_Phone 'Supplier Phone',supplier_Address 'Supplier Address',remark  'Remark',POstatus 'Status' from purchase_order;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -296,7 +298,7 @@ namespace FYP_sale_book_system
                 {
 
 
-                    string SQL1 = "select SNID from procurementstock";
+                    string SQL1 = "select SNID from procurementstock where phasing_out_status = 'No';";
                     DataTable dt1 = new DataTable();
                     MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
                     MySqlDataReader myData1 = cmd1.ExecuteReader();
@@ -337,10 +339,11 @@ namespace FYP_sale_book_system
             }
 
         }
-        public procurement_create_purchase_order(string uIMode)
+        public procurement_create_purchase_order(procurement_manage_purchase_order manager_po, string uIMode)
         {
             InitializeComponent();
             this.UI_mode = uIMode;
+            this.manage_Purchase_Order = manager_po;
         }
 
         private void procurement_create_purchase_order_Load(object sender, EventArgs e)
@@ -372,7 +375,7 @@ namespace FYP_sale_book_system
                     {
                         string data = supplier_id_txt.Text;
 
-                        string SQL4 = "select supplier_name,supplier_phone,supplier_address from supplier where supplier_id = '" + data + "';";
+                        string SQL4 = "select supplier_id 'Supplier ID', supplier_name 'Supplier Name', supplier_address 'Supplier Address',supplier_phone 'Supplier Phone',supplier_dept 'Department',supplier_detail 'Detail' from supplier where supplier_id = '" + data + "';";
                         DataTable dt4 = new DataTable();
                         MySqlCommand cmd4 = new MySqlCommand(SQL4, conn);
 
@@ -381,8 +384,8 @@ namespace FYP_sale_book_system
 
                         while (myData4.Read())
                         {
-                            supplier_txt.Text = myData4.GetValue(0).ToString();
-                            s_phone_txt.Text = myData4.GetValue(1).ToString();
+                            supplier_txt.Text = myData4.GetValue(1).ToString();
+                            s_phone_txt.Text = myData4.GetValue(3).ToString();
                             s_address_txt.Text = myData4.GetValue(2).ToString();
                         }
                         conn.Close();
@@ -505,7 +508,7 @@ namespace FYP_sale_book_system
 
         private void qty_txt_TextChanged(object sender, EventArgs e)
         {
-            if (qty_txt.Text != "")
+            if (qty_txt.Text != ""&& check.checkNUM(qty_txt.Text))
             {
                 int qty = Convert.ToInt32(qty_txt.Text);
                 int unit_price = Convert.ToInt32(unit_price_txt.Text);
@@ -517,6 +520,7 @@ namespace FYP_sale_book_system
 
         private void create_Click(object sender, EventArgs e)
         {
+            if (supplier_id_txt.Text!="" && location_id_txt.Text != "" &&snid_txt.Text != "" && check.checkNUM(qty_txt.Text) && date_txt.Text != "" && remark_txt.Text != "") { 
             string po_number = po_txt.Text;
             int supplier_id = Convert.ToInt32(supplier_id_txt.Text);
             string supplier_name = supplier_txt.Text;
@@ -540,7 +544,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                //input
+                //create purchase order
                 string SQL = "insert into purchase_order values(" + "null," + company_id + ",'" + company_name + "'," + company_phone + ",'" + company_address + "','" + po_number + "','" +
                                date+ "'," + snid + ",'" + book_name + "'," + qty + "," + unit_price + "," + total_price + "," + supplier_id+",'"+supplier_name+"',"+supplier_phone+",'"+supplier_address+"','"+remark+"','"+status+"');";
                 DataTable dt = new DataTable();
@@ -570,13 +574,18 @@ namespace FYP_sale_book_system
             item_total_price_txt.Clear();
             snid_txt.ResetText();
             book_name_txt.Clear();
-            qty_txt.Clear();
+            qty_txt.Clear(); }
+            else 
+            {
+                MessageBox.Show("Data is not complete!!");
+            }
+
 
 
         }
 
         private void restart_btn_Click(object sender, EventArgs e)
-        {
+        {   //restart value
             supplier_id_txt.ResetText();
             location_id_txt.ResetText();
             po_txt.Clear();
@@ -597,12 +606,12 @@ namespace FYP_sale_book_system
         }
 
         private void show_supplier_btn_Click(object sender, EventArgs e)
-        {
+        {     
             this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
+            {   //display supplier information
                 string SQL = "select * from supplier;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);

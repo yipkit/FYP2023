@@ -30,16 +30,66 @@ namespace FYP_sale_book_system
         private string UIMode;
         private string UILevel;
         private string UIPost;
-        private string UIdutyID;
         private string UIKEY;
         private string UILocation;
         private int resultSYS;
         private string sql;
-
+        private string UIStatus;
+        private string UIJOBTYPE;
         //sales_create_sales_order CSO = new sales_create_sales_order();
-       
-        sales_create_Ebook_order borrow_book = new sales_create_Ebook_order();
-        
+
+        private void checkHiddenGroupBox()
+        {
+            if ((this.UIPost == "Manager" || Convert.ToInt32(this.UILevel) >= 2) && this.UIStatus == "Normal")//Sales Order
+            {
+                groupBox3.Visible = true;
+            }
+            else
+            {
+                groupBox3.Visible = false;
+            }
+            if ((this.UIPost == "Manager" || Convert.ToInt32(this.UILevel) >= 2) && this.UIStatus == "Normal")//Stock Take
+            {
+                groupBox4.Visible = true;
+            }
+            else
+            {
+                groupBox4.Visible = false;
+            }
+            if ((this.UIPost == "Manager" || Convert.ToInt32(this.UILevel) >= 2) && this.UIStatus == "Normal")// Sales Stock
+            {
+                groupBox5.Visible = true;
+            }
+            else
+            {
+                groupBox5.Visible = false;
+            }
+            if ((this.UIPost == "Manager" || Convert.ToInt32(this.UILevel) >= 3) && this.UIStatus == "Normal")// Customer Setting
+            {
+                groupBox6.Visible = true;
+            }
+            else
+            {
+                groupBox6.Visible = false;
+            }
+            if ((this.UIPost == "Manager" || Convert.ToInt32(this.UILevel) >= 2) && this.UIStatus == "Normal")// E-Book
+            {
+                Ebook.Visible = true;
+            }
+            else
+            {
+                Ebook.Visible = false;
+            }
+            if ((this.UIPost == "Manager" || Convert.ToInt32(this.UILevel) >= 6) && this.UIStatus == "Normal")// Other Function
+            {
+                groupBox1.Visible = true;
+            }
+            else
+            {
+                groupBox1.Visible = false;
+            }
+        }
+
 
 
         private int checkConnection(string mode)
@@ -63,6 +113,7 @@ namespace FYP_sale_book_system
             
             MySqlCommand cmd = new MySqlCommand(sql, this.conn);
             MySqlDataReader myData = cmd.ExecuteReader();
+            this.conn.Close();
 
 
         }
@@ -98,7 +149,9 @@ namespace FYP_sale_book_system
             this.UILevel = CUR.checkRight( staffID, Mode);
             this.UIPost = CUR.checkPost(staffID, Mode);
             this.UILocation = location;
-
+            this.UIStatus = PPD.checkPersonStatus(staffID, Mode);
+            this.UIJOBTYPE = PPD.checkPersonJobType(staffID, Mode);
+            checkHiddenGroupBox();//Set Staff Right
 
 
         }
@@ -123,7 +176,8 @@ namespace FYP_sale_book_system
 
         private void borrow_book_btn_Click(object sender, EventArgs e)
         {
-            borrow_book.ShowDialog();
+            sales_create_Ebook_order EbookAndGits  = new sales_create_Ebook_order(this.UIMode, this.UILocation, this.UIStaffID);
+            EbookAndGits.ShowDialog();
         }
 
         private void btn_CreateSalesOrder_Click(object sender, EventArgs e)
@@ -169,7 +223,7 @@ namespace FYP_sale_book_system
 
         private void gen_ebook_link_btn_Click(object sender, EventArgs e)
         {
-            sale_gen_Ebook_link gen_link = new sale_gen_Ebook_link(this.UIMode);
+            sale_gen_Ebook_link gen_link = new sale_gen_Ebook_link(this.UIMode,"0","0");
             gen_link.ShowDialog();
         }
 
@@ -177,6 +231,12 @@ namespace FYP_sale_book_system
         {
             sale_edit_ebook_link edit_ebook = new sale_edit_ebook_link(this.UIMode);
             edit_ebook.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataAnalysis DA = new DataAnalysis();
+            DA.ShowDialog();
         }
     }
 }

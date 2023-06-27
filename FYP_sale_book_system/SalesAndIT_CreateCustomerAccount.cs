@@ -37,6 +37,9 @@ namespace FYP_sale_book_system
         private MySqlConnection conn; // call connDB
         private string UIStaffID;
         private string UIMode;
+
+        CustomerAccountManagement CAM;
+
         private string UILevel;
         private string UIPost;
         private string UIdutyID;
@@ -130,6 +133,7 @@ namespace FYP_sale_book_system
             
             InitializeComponent();
             this.UIMode = mode;
+            
         }
 
         private void SalesAndIT_CreateCustomerAccount_Load(object sender, EventArgs e)

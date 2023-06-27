@@ -65,6 +65,7 @@ namespace FYP_sale_book_system
             this.po_txt.Name = "po_txt";
             this.po_txt.Size = new System.Drawing.Size(121, 20);
             this.po_txt.TabIndex = 52;
+            this.po_txt.SelectedIndexChanged += new System.EventHandler(this.po_txt_SelectedIndexChanged);
             // 
             // close_btn
             // 

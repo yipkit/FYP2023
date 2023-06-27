@@ -70,23 +70,23 @@ namespace FYP_sale_book_system
             this.txt_Remark = new System.Windows.Forms.TextBox();
             this.labe_Remark = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.txt_CustomerAmount = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.btn_result = new System.Windows.Forms.Button();
-            this.button_7 = new System.Windows.Forms.Button();
-            this.button_4 = new System.Windows.Forms.Button();
-            this.button_1 = new System.Windows.Forms.Button();
-            this.button_8 = new System.Windows.Forms.Button();
-            this.button_5 = new System.Windows.Forms.Button();
-            this.button_2 = new System.Windows.Forms.Button();
-            this.button_9 = new System.Windows.Forms.Button();
-            this.button_6 = new System.Windows.Forms.Button();
-            this.button_3 = new System.Windows.Forms.Button();
-            this.txt_Return = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.button1_point = new System.Windows.Forms.Button();
-            this.button_0 = new System.Windows.Forms.Button();
             this.button_AC = new System.Windows.Forms.Button();
+            this.button_0 = new System.Windows.Forms.Button();
+            this.button1_point = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txt_Return = new System.Windows.Forms.TextBox();
+            this.button_3 = new System.Windows.Forms.Button();
+            this.button_6 = new System.Windows.Forms.Button();
+            this.button_9 = new System.Windows.Forms.Button();
+            this.button_2 = new System.Windows.Forms.Button();
+            this.button_5 = new System.Windows.Forms.Button();
+            this.button_8 = new System.Windows.Forms.Button();
+            this.button_1 = new System.Windows.Forms.Button();
+            this.button_4 = new System.Windows.Forms.Button();
+            this.button_7 = new System.Windows.Forms.Button();
+            this.btn_result = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.txt_CustomerAmount = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -1571,6 +1571,7 @@ namespace FYP_sale_book_system
             // 
             // comb_CN
             // 
+            this.comb_CN.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comb_CN.FormattingEnabled = true;
             this.comb_CN.Items.AddRange(new object[] {
             "+86",
@@ -1822,7 +1823,7 @@ namespace FYP_sale_book_system
             this.comb_CN.Name = "comb_CN";
             this.comb_CN.Size = new System.Drawing.Size(121, 20);
             this.comb_CN.TabIndex = 15;
-            this.comb_CN.Text = "Country Number";
+            this.comb_CN.SelectedIndexChanged += new System.EventHandler(this.comb_CN_SelectedIndexChanged);
             // 
             // text_PNUM
             // 
@@ -1884,149 +1885,15 @@ namespace FYP_sale_book_system
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Calculator";
             // 
-            // txt_CustomerAmount
+            // button_AC
             // 
-            this.txt_CustomerAmount.Location = new System.Drawing.Point(416, 15);
-            this.txt_CustomerAmount.Name = "txt_CustomerAmount";
-            this.txt_CustomerAmount.ReadOnly = true;
-            this.txt_CustomerAmount.Size = new System.Drawing.Size(259, 22);
-            this.txt_CustomerAmount.TabIndex = 19;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(313, 18);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(97, 12);
-            this.label17.TabIndex = 20;
-            this.label17.Text = "Customer Amount :";
-            // 
-            // btn_result
-            // 
-            this.btn_result.Location = new System.Drawing.Point(592, 162);
-            this.btn_result.Name = "btn_result";
-            this.btn_result.Size = new System.Drawing.Size(75, 23);
-            this.btn_result.TabIndex = 21;
-            this.btn_result.Text = "=";
-            this.btn_result.UseVisualStyleBackColor = true;
-            this.btn_result.Click += new System.EventHandler(this.btn_result_Click);
-            // 
-            // button_7
-            // 
-            this.button_7.Location = new System.Drawing.Point(430, 73);
-            this.button_7.Name = "button_7";
-            this.button_7.Size = new System.Drawing.Size(75, 23);
-            this.button_7.TabIndex = 22;
-            this.button_7.Text = "7";
-            this.button_7.UseVisualStyleBackColor = true;
-            this.button_7.Click += new System.EventHandler(this.button_7_Click);
-            // 
-            // button_4
-            // 
-            this.button_4.Location = new System.Drawing.Point(430, 104);
-            this.button_4.Name = "button_4";
-            this.button_4.Size = new System.Drawing.Size(75, 23);
-            this.button_4.TabIndex = 23;
-            this.button_4.Text = "4";
-            this.button_4.UseVisualStyleBackColor = true;
-            this.button_4.Click += new System.EventHandler(this.button_4_Click);
-            // 
-            // button_1
-            // 
-            this.button_1.Location = new System.Drawing.Point(430, 133);
-            this.button_1.Name = "button_1";
-            this.button_1.Size = new System.Drawing.Size(75, 23);
-            this.button_1.TabIndex = 24;
-            this.button_1.Text = "1";
-            this.button_1.UseVisualStyleBackColor = true;
-            this.button_1.Click += new System.EventHandler(this.button_1_Click);
-            // 
-            // button_8
-            // 
-            this.button_8.Location = new System.Drawing.Point(511, 73);
-            this.button_8.Name = "button_8";
-            this.button_8.Size = new System.Drawing.Size(75, 23);
-            this.button_8.TabIndex = 25;
-            this.button_8.Text = "8";
-            this.button_8.UseVisualStyleBackColor = true;
-            this.button_8.Click += new System.EventHandler(this.button_8_Click);
-            // 
-            // button_5
-            // 
-            this.button_5.Location = new System.Drawing.Point(511, 102);
-            this.button_5.Name = "button_5";
-            this.button_5.Size = new System.Drawing.Size(75, 23);
-            this.button_5.TabIndex = 26;
-            this.button_5.Text = "5";
-            this.button_5.UseVisualStyleBackColor = true;
-            this.button_5.Click += new System.EventHandler(this.button_5_Click);
-            // 
-            // button_2
-            // 
-            this.button_2.Location = new System.Drawing.Point(511, 133);
-            this.button_2.Name = "button_2";
-            this.button_2.Size = new System.Drawing.Size(75, 23);
-            this.button_2.TabIndex = 27;
-            this.button_2.Text = "2";
-            this.button_2.UseVisualStyleBackColor = true;
-            this.button_2.Click += new System.EventHandler(this.button_2_Click);
-            // 
-            // button_9
-            // 
-            this.button_9.Location = new System.Drawing.Point(592, 73);
-            this.button_9.Name = "button_9";
-            this.button_9.Size = new System.Drawing.Size(75, 23);
-            this.button_9.TabIndex = 28;
-            this.button_9.Text = "9";
-            this.button_9.UseVisualStyleBackColor = true;
-            this.button_9.Click += new System.EventHandler(this.button_9_Click);
-            // 
-            // button_6
-            // 
-            this.button_6.Location = new System.Drawing.Point(592, 102);
-            this.button_6.Name = "button_6";
-            this.button_6.Size = new System.Drawing.Size(75, 23);
-            this.button_6.TabIndex = 29;
-            this.button_6.Text = "6";
-            this.button_6.UseVisualStyleBackColor = true;
-            this.button_6.Click += new System.EventHandler(this.button_6_Click);
-            // 
-            // button_3
-            // 
-            this.button_3.Location = new System.Drawing.Point(592, 131);
-            this.button_3.Name = "button_3";
-            this.button_3.Size = new System.Drawing.Size(75, 23);
-            this.button_3.TabIndex = 30;
-            this.button_3.Text = "3";
-            this.button_3.UseVisualStyleBackColor = true;
-            this.button_3.Click += new System.EventHandler(this.button_3_Click);
-            // 
-            // txt_Return
-            // 
-            this.txt_Return.Location = new System.Drawing.Point(416, 43);
-            this.txt_Return.Name = "txt_Return";
-            this.txt_Return.ReadOnly = true;
-            this.txt_Return.Size = new System.Drawing.Size(259, 22);
-            this.txt_Return.TabIndex = 31;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(321, 46);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(84, 12);
-            this.label18.TabIndex = 32;
-            this.label18.Text = "Return Amount :";
-            // 
-            // button1_point
-            // 
-            this.button1_point.Location = new System.Drawing.Point(511, 162);
-            this.button1_point.Name = "button1_point";
-            this.button1_point.Size = new System.Drawing.Size(75, 23);
-            this.button1_point.TabIndex = 33;
-            this.button1_point.Text = ".";
-            this.button1_point.UseVisualStyleBackColor = true;
-            this.button1_point.Click += new System.EventHandler(this.button1_point_Click);
+            this.button_AC.Location = new System.Drawing.Point(678, 73);
+            this.button_AC.Name = "button_AC";
+            this.button_AC.Size = new System.Drawing.Size(75, 23);
+            this.button_AC.TabIndex = 35;
+            this.button_AC.Text = "AC";
+            this.button_AC.UseVisualStyleBackColor = true;
+            this.button_AC.Click += new System.EventHandler(this.button_AC_Click);
             // 
             // button_0
             // 
@@ -2038,15 +1905,149 @@ namespace FYP_sale_book_system
             this.button_0.UseVisualStyleBackColor = true;
             this.button_0.Click += new System.EventHandler(this.button_0_Click);
             // 
-            // button_AC
+            // button1_point
             // 
-            this.button_AC.Location = new System.Drawing.Point(678, 73);
-            this.button_AC.Name = "button_AC";
-            this.button_AC.Size = new System.Drawing.Size(75, 23);
-            this.button_AC.TabIndex = 35;
-            this.button_AC.Text = "AC";
-            this.button_AC.UseVisualStyleBackColor = true;
-            this.button_AC.Click += new System.EventHandler(this.button_AC_Click);
+            this.button1_point.Location = new System.Drawing.Point(511, 162);
+            this.button1_point.Name = "button1_point";
+            this.button1_point.Size = new System.Drawing.Size(75, 23);
+            this.button1_point.TabIndex = 33;
+            this.button1_point.Text = ".";
+            this.button1_point.UseVisualStyleBackColor = true;
+            this.button1_point.Click += new System.EventHandler(this.button1_point_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(321, 46);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(84, 12);
+            this.label18.TabIndex = 32;
+            this.label18.Text = "Return Amount :";
+            // 
+            // txt_Return
+            // 
+            this.txt_Return.Location = new System.Drawing.Point(416, 43);
+            this.txt_Return.Name = "txt_Return";
+            this.txt_Return.ReadOnly = true;
+            this.txt_Return.Size = new System.Drawing.Size(259, 22);
+            this.txt_Return.TabIndex = 31;
+            // 
+            // button_3
+            // 
+            this.button_3.Location = new System.Drawing.Point(592, 131);
+            this.button_3.Name = "button_3";
+            this.button_3.Size = new System.Drawing.Size(75, 23);
+            this.button_3.TabIndex = 30;
+            this.button_3.Text = "3";
+            this.button_3.UseVisualStyleBackColor = true;
+            this.button_3.Click += new System.EventHandler(this.button_3_Click);
+            // 
+            // button_6
+            // 
+            this.button_6.Location = new System.Drawing.Point(592, 102);
+            this.button_6.Name = "button_6";
+            this.button_6.Size = new System.Drawing.Size(75, 23);
+            this.button_6.TabIndex = 29;
+            this.button_6.Text = "6";
+            this.button_6.UseVisualStyleBackColor = true;
+            this.button_6.Click += new System.EventHandler(this.button_6_Click);
+            // 
+            // button_9
+            // 
+            this.button_9.Location = new System.Drawing.Point(592, 73);
+            this.button_9.Name = "button_9";
+            this.button_9.Size = new System.Drawing.Size(75, 23);
+            this.button_9.TabIndex = 28;
+            this.button_9.Text = "9";
+            this.button_9.UseVisualStyleBackColor = true;
+            this.button_9.Click += new System.EventHandler(this.button_9_Click);
+            // 
+            // button_2
+            // 
+            this.button_2.Location = new System.Drawing.Point(511, 133);
+            this.button_2.Name = "button_2";
+            this.button_2.Size = new System.Drawing.Size(75, 23);
+            this.button_2.TabIndex = 27;
+            this.button_2.Text = "2";
+            this.button_2.UseVisualStyleBackColor = true;
+            this.button_2.Click += new System.EventHandler(this.button_2_Click);
+            // 
+            // button_5
+            // 
+            this.button_5.Location = new System.Drawing.Point(511, 102);
+            this.button_5.Name = "button_5";
+            this.button_5.Size = new System.Drawing.Size(75, 23);
+            this.button_5.TabIndex = 26;
+            this.button_5.Text = "5";
+            this.button_5.UseVisualStyleBackColor = true;
+            this.button_5.Click += new System.EventHandler(this.button_5_Click);
+            // 
+            // button_8
+            // 
+            this.button_8.Location = new System.Drawing.Point(511, 73);
+            this.button_8.Name = "button_8";
+            this.button_8.Size = new System.Drawing.Size(75, 23);
+            this.button_8.TabIndex = 25;
+            this.button_8.Text = "8";
+            this.button_8.UseVisualStyleBackColor = true;
+            this.button_8.Click += new System.EventHandler(this.button_8_Click);
+            // 
+            // button_1
+            // 
+            this.button_1.Location = new System.Drawing.Point(430, 133);
+            this.button_1.Name = "button_1";
+            this.button_1.Size = new System.Drawing.Size(75, 23);
+            this.button_1.TabIndex = 24;
+            this.button_1.Text = "1";
+            this.button_1.UseVisualStyleBackColor = true;
+            this.button_1.Click += new System.EventHandler(this.button_1_Click);
+            // 
+            // button_4
+            // 
+            this.button_4.Location = new System.Drawing.Point(430, 104);
+            this.button_4.Name = "button_4";
+            this.button_4.Size = new System.Drawing.Size(75, 23);
+            this.button_4.TabIndex = 23;
+            this.button_4.Text = "4";
+            this.button_4.UseVisualStyleBackColor = true;
+            this.button_4.Click += new System.EventHandler(this.button_4_Click);
+            // 
+            // button_7
+            // 
+            this.button_7.Location = new System.Drawing.Point(430, 73);
+            this.button_7.Name = "button_7";
+            this.button_7.Size = new System.Drawing.Size(75, 23);
+            this.button_7.TabIndex = 22;
+            this.button_7.Text = "7";
+            this.button_7.UseVisualStyleBackColor = true;
+            this.button_7.Click += new System.EventHandler(this.button_7_Click);
+            // 
+            // btn_result
+            // 
+            this.btn_result.Location = new System.Drawing.Point(592, 162);
+            this.btn_result.Name = "btn_result";
+            this.btn_result.Size = new System.Drawing.Size(75, 23);
+            this.btn_result.TabIndex = 21;
+            this.btn_result.Text = "=";
+            this.btn_result.UseVisualStyleBackColor = true;
+            this.btn_result.Click += new System.EventHandler(this.btn_result_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(313, 18);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(97, 12);
+            this.label17.TabIndex = 20;
+            this.label17.Text = "Customer Amount :";
+            // 
+            // txt_CustomerAmount
+            // 
+            this.txt_CustomerAmount.Location = new System.Drawing.Point(416, 15);
+            this.txt_CustomerAmount.Name = "txt_CustomerAmount";
+            this.txt_CustomerAmount.ReadOnly = true;
+            this.txt_CustomerAmount.Size = new System.Drawing.Size(259, 22);
+            this.txt_CustomerAmount.TabIndex = 19;
             // 
             // sales_Payment
             // 

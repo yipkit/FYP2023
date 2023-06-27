@@ -32,6 +32,7 @@ namespace FYP_sale_book_system
             this.logout_btn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.borrow_book_btn = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -42,7 +43,6 @@ namespace FYP_sale_book_system
             this.btn_ReviewSalesStock = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btn_CreateCustomerAccount = new System.Windows.Forms.Button();
-            this.gen_ebook_link_btn = new System.Windows.Forms.Button();
             this.Ebook = new System.Windows.Forms.GroupBox();
             this.ebook_edit_btn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
@@ -75,28 +75,38 @@ namespace FYP_sale_book_system
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.borrow_book_btn);
-            this.groupBox1.Location = new System.Drawing.Point(626, 84);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Location = new System.Drawing.Point(417, 233);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(138, 59);
+            this.groupBox1.Size = new System.Drawing.Size(200, 77);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Test";
+            this.groupBox1.Text = "Other Function";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(6, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(188, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Data Analysis";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // borrow_book_btn
             // 
-            this.borrow_book_btn.Location = new System.Drawing.Point(6, 23);
+            this.borrow_book_btn.Location = new System.Drawing.Point(17, 46);
             this.borrow_book_btn.Name = "borrow_book_btn";
-            this.borrow_book_btn.Size = new System.Drawing.Size(115, 23);
+            this.borrow_book_btn.Size = new System.Drawing.Size(177, 23);
             this.borrow_book_btn.TabIndex = 5;
-            this.borrow_book_btn.Text = "Borrow Book";
+            this.borrow_book_btn.Text = "Buy E Book Or Gits Cards";
             this.borrow_book_btn.UseVisualStyleBackColor = true;
             this.borrow_book_btn.Click += new System.EventHandler(this.borrow_book_btn_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btn_CreateSalesOrder);
-            this.groupBox3.Location = new System.Drawing.Point(12, 84);
+            this.groupBox3.Location = new System.Drawing.Point(211, 85);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(200, 59);
             this.groupBox3.TabIndex = 6;
@@ -116,9 +126,9 @@ namespace FYP_sale_book_system
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.btn_CreateStockTake);
-            this.groupBox4.Location = new System.Drawing.Point(12, 149);
+            this.groupBox4.Location = new System.Drawing.Point(211, 150);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 53);
+            this.groupBox4.Size = new System.Drawing.Size(200, 77);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Stock Take";
@@ -136,9 +146,9 @@ namespace FYP_sale_book_system
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.btn_ReviewSalesStock);
-            this.groupBox5.Location = new System.Drawing.Point(12, 208);
+            this.groupBox5.Location = new System.Drawing.Point(211, 233);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(200, 59);
+            this.groupBox5.Size = new System.Drawing.Size(200, 77);
             this.groupBox5.TabIndex = 7;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Sales Stock";
@@ -156,9 +166,9 @@ namespace FYP_sale_book_system
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.btn_CreateCustomerAccount);
-            this.groupBox6.Location = new System.Drawing.Point(218, 84);
+            this.groupBox6.Location = new System.Drawing.Point(417, 85);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(200, 100);
+            this.groupBox6.Size = new System.Drawing.Size(200, 59);
             this.groupBox6.TabIndex = 8;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Customer Setting";
@@ -173,32 +183,22 @@ namespace FYP_sale_book_system
             this.btn_CreateCustomerAccount.UseVisualStyleBackColor = true;
             this.btn_CreateCustomerAccount.Click += new System.EventHandler(this.btn_CreateCustomerAccount_Click);
             // 
-            // gen_ebook_link_btn
-            // 
-            this.gen_ebook_link_btn.Location = new System.Drawing.Point(17, 25);
-            this.gen_ebook_link_btn.Name = "gen_ebook_link_btn";
-            this.gen_ebook_link_btn.Size = new System.Drawing.Size(162, 21);
-            this.gen_ebook_link_btn.TabIndex = 0;
-            this.gen_ebook_link_btn.Text = "Gen Ebook Link";
-            this.gen_ebook_link_btn.UseVisualStyleBackColor = true;
-            this.gen_ebook_link_btn.Click += new System.EventHandler(this.gen_ebook_link_btn_Click);
-            // 
             // Ebook
             // 
+            this.Ebook.Controls.Add(this.borrow_book_btn);
             this.Ebook.Controls.Add(this.ebook_edit_btn);
-            this.Ebook.Controls.Add(this.gen_ebook_link_btn);
-            this.Ebook.Location = new System.Drawing.Point(424, 84);
+            this.Ebook.Location = new System.Drawing.Point(417, 150);
             this.Ebook.Name = "Ebook";
-            this.Ebook.Size = new System.Drawing.Size(200, 100);
+            this.Ebook.Size = new System.Drawing.Size(200, 77);
             this.Ebook.TabIndex = 9;
             this.Ebook.TabStop = false;
             this.Ebook.Text = "E-book";
             // 
             // ebook_edit_btn
             // 
-            this.ebook_edit_btn.Location = new System.Drawing.Point(17, 52);
+            this.ebook_edit_btn.Location = new System.Drawing.Point(17, 21);
             this.ebook_edit_btn.Name = "ebook_edit_btn";
-            this.ebook_edit_btn.Size = new System.Drawing.Size(162, 23);
+            this.ebook_edit_btn.Size = new System.Drawing.Size(177, 23);
             this.ebook_edit_btn.TabIndex = 1;
             this.ebook_edit_btn.Text = "Edit Ebook Link";
             this.ebook_edit_btn.UseVisualStyleBackColor = true;
@@ -246,8 +246,8 @@ namespace FYP_sale_book_system
         private System.Windows.Forms.Button btn_CreateSalesOrder;
         private System.Windows.Forms.Button btn_CreateStockTake;
         private System.Windows.Forms.Button btn_ReviewSalesStock;
-        private System.Windows.Forms.Button gen_ebook_link_btn;
         private System.Windows.Forms.GroupBox Ebook;
         private System.Windows.Forms.Button ebook_edit_btn;
+        private System.Windows.Forms.Button button1;
     }
 }

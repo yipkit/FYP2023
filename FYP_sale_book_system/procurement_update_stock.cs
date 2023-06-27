@@ -12,41 +12,14 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_update_stock : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         private MySqlConnection conn;
         private int resultSYS;
         string stock_type = "";
         string stock_status = "";
-
-        /* public static MySqlConnection connDB2()
-         {
-
-             string host = "localhost";
-             string user = "root";
-             string pwd = "exia0721";
-             string databaseName = "database_version1";
-
-             string connStr = "server=" + host + ";uid=" + user + ";pwd=" + pwd + ";database=" + databaseName;
-             MySqlConnection conn = new MySqlConnection(connStr);
-             try
-             {
-                 conn.Open();
-             }
-             catch (MySql.Data.MySqlClient.MySqlException ex)
-             {
-                 switch (ex.Number)
-                 {
-                     case 0:
-                         Console.WriteLine("無法連線到資料庫.");
-                         break;
-                     case 1045:
-                         Console.WriteLine("使用者帳號或密碼錯誤,請再試一次.");
-                         break;
-                 }
-             }
-             return conn;
-         }*/
+        ErrorControl check = new ErrorControl();
+        procurement_edit_stock_function edit_stock;
 
         private int checkConnection(string mode)
         {
@@ -77,7 +50,7 @@ namespace FYP_sale_book_system
                 {
 
 
-                    string SQL1 = "select SNID from procurementstock";
+                    string SQL1 = "select SNID from procurementstock where phasing_out_status = 'No';";
                     DataTable dt1 = new DataTable();
                     MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
                     MySqlDataReader myData1 = cmd1.ExecuteReader();
@@ -103,10 +76,11 @@ namespace FYP_sale_book_system
             }
 
         }
-        public procurement_update_stock(string UIMode)
+        public procurement_update_stock(procurement_edit_stock_function edit_Stock,string UIMode)
         {
             InitializeComponent();
             this.UI_mode = UIMode;
+            this.edit_stock = edit_Stock;
         }
 
         public bool UseVisualStyleBackColor { get; internal set; }
@@ -185,9 +159,10 @@ namespace FYP_sale_book_system
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
-                string SQL = "select procure_stock_id, SNID,bookname,book_qty,book_stockLv, authors_name as AuthorsName,language,category,detail ,book_date " +
-                          "from procurementstock p, authors a,languages l,category c where p.authors_id=a.authors_id and p.languages_id=l.languages_id and p.category_id = c.category_id;";
+            {   //display procurement stock information
+
+                string SQL = "select procure_stock_id 'Stock ID', SNID,bookname 'Book Name',book_qty 'Qty',book_stockLv 'Stock Level', authors_name 'Authors Name',language,category,detail ,book_date 'In Date',p.comp_LocationID 'Location ID',comp_Name 'Company Name' " +
+                      "from procurementstock p, authors a,languages l,category c,company comp where p.comp_LocationID = comp.comp_LocationID and p.authors_id=a.authors_id and p.languages_id=l.languages_id and p.category_id = c.category_id;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -215,8 +190,8 @@ namespace FYP_sale_book_system
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
-                string SQL = "select * from supplier;";
+            {    //display supplier information
+                string SQL = "select SNID,bookname,p.supplier_id 'Supplier ID', supplier_name 'Supplier Name', supplier_address 'Supplier Address',supplier_phone 'Supplier Phone',supplier_dept 'Department',supplier_detail 'Detail' from procurementstock p, supplier s where p.supplier_id = s.supplier_id;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -236,8 +211,8 @@ namespace FYP_sale_book_system
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
-                string SQL = "select * from authors;";
+            {   //display author information
+                string SQL = "select SNID,bookname,p.authors_id 'Authors ID',authors_name 'Authors Name' from procurementstock p,authors a where p.authors_id = a.authors_id;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -253,6 +228,7 @@ namespace FYP_sale_book_system
 
         private void update_btn_Click(object sender, EventArgs e)
         {
+            if (invoice_txt.Text!=""&&supplier_txt.Text!=""&&car_no_txt.Text!=""&&snid_txt.Text!="" && check.checkNUM(Qty_txt.Text) && remark_txt.Text != "" && this.stock_type != "" && this.stock_status != "") {
             string invoice_data = invoice_txt.Text;
             string cust_name_data = cust_name_txt.Text;
             string supplier_name_data = supplier_txt.Text;
@@ -272,12 +248,12 @@ namespace FYP_sale_book_system
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
+            {   //update item Qty
                 string SQL1 = "update procurementstock set book_qty = book_qty+" + qty_data + ", book_date ='" + date_data + "' where SNID = " + snid_data + ";";
                 DataTable dt1 = new DataTable();
                 MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
                 MySqlDataReader myData1 = cmd1.ExecuteReader();
-                //insert into stockbook values(null,'abc1234','jack','N/A','N/A','22-06-01','21:20','defect','wf1000','sony tv',1,'IN');
+              
                 conn.Close();
             }
             else
@@ -290,7 +266,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                //input
+                //input item record
                 string SQL = "insert into procurement_stock_book values(" + "null,"+1+",'"+ invoice_data + "','" + dept_data + "','" + supplier_name_data + "','" + car_no_data + "','" +
                                                       date_data + "','" + time_data + "','" + stock_type + "','" + snid_data + "','" + item_name_data + "'," + qty_data + ",'" + stock_status + "');";
                 DataTable dt = new DataTable();
@@ -308,7 +284,7 @@ namespace FYP_sale_book_system
             MessageBox.Show("Updated");
             invoice_txt.Clear();
             cust_name_txt.Clear();
-
+            supplier_txt.ResetText();
             car_no_txt.Clear();
 
             time_txt.Clear();
@@ -324,6 +300,11 @@ namespace FYP_sale_book_system
             in_radiio.Checked = false;
             out_radio.Checked = false;
             cust_name_txt.Text = "N/A";
+            }
+            else { 
+                MessageBox.Show("Data is not complete !!"); 
+            }
+            
         }
 
         private void restart_btn_Click(object sender, EventArgs e)
@@ -445,7 +426,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                //display info
+                //display stock book information
                 string SQL1 = "select * from procurement_stock_book;";
                 DataTable dt1 = new DataTable();
                 MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
@@ -462,23 +443,32 @@ namespace FYP_sale_book_system
 
         private void search_Click(object sender, EventArgs e)
         {
-            this.resultSYS = 0;
-            this.resultSYS = checkConnection(this.UI_mode);
+            if (snid1_txt.Text != "")
+            {
+                this.resultSYS = 0;
+                this.resultSYS = checkConnection(this.UI_mode);
 
-            if (this.resultSYS == 1)
-            {
-                string SQL = "select * from procurementstock where SNID = " + Convert.ToInt64(snid1_txt.Text) + ";";
-                DataTable dt = new DataTable();
-                MySqlCommand cmd = new MySqlCommand(SQL, conn);
-                MySqlDataReader myData = cmd.ExecuteReader();
-                dt.Load(myData);
-                dataGridView1.DataSource = dt;
-                conn.Close();
+                if (this.resultSYS == 1)
+                {
+                    string SQL = "select procure_stock_id 'Stock ID', SNID,bookname 'Book Name',book_qty 'Qty',book_stockLv 'Stock Level', authors_name 'AuthorsName',language,category,detail ,book_date 'In Date',p.comp_LocationID 'Location ID',comp_Name 'Company Name' " +
+                          "from procurementstock p, authors a,languages l,category c,company comp where p.comp_LocationID = comp.comp_LocationID and p.authors_id=a.authors_id and p.languages_id=l.languages_id and p.category_id = c.category_id and SNID = " + Convert.ToInt64(snid1_txt.Text) + ";";
+                    DataTable dt = new DataTable();
+                    MySqlCommand cmd = new MySqlCommand(SQL, conn);
+                    MySqlDataReader myData = cmd.ExecuteReader();
+                    dt.Load(myData);
+                    dataGridView1.DataSource = dt;
+                    conn.Close();
+                    snid1_txt.ResetText();
+                }
+                else
+                {
+                    MessageBox.Show("Connection Error !!");
+                }
             }
-            else
-            {
-                MessageBox.Show("Connection Error !!");
+            else { 
+                MessageBox.Show("Please select SNID !!"); 
             }
+           
         }
     }
 }

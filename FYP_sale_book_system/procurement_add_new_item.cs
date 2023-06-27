@@ -12,11 +12,13 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_add_new_item : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         private MySqlConnection conn;
         private int resultSYS;
         private string dept_data = "";
+        ErrorControl check = new ErrorControl();
+        procurement_edit_stock_function edit_stock;
 
         private int checkConnection(string mode)
         {
@@ -362,10 +364,11 @@ namespace FYP_sale_book_system
             status_txt.Items.Add("No");
 
         }
-        public procurement_add_new_item(string uIMode)
+        public procurement_add_new_item(procurement_edit_stock_function edit_Stock, string uIMode)
         {
             InitializeComponent();
             this.UI_mode = uIMode;
+           this.edit_stock = edit_Stock;
         }
        private void procurement_add_new_item_Load(object sender, EventArgs e)
         {
@@ -378,27 +381,27 @@ namespace FYP_sale_book_system
             book_status();
         }
         private void author_info_btn_Click(object sender, EventArgs e)
-        {
+        {   //display anthor information
             anthors_info();
         }
 
         private void location_id_btn_Click(object sender, EventArgs e)
-        {
+        {  //display company location information
             location_info();
         }
 
         private void category_info_btn_Click(object sender, EventArgs e)
-        {
+        {  //display category information
             category_info();
         }
 
         private void language_info_btn_Click(object sender, EventArgs e)
-        {
+        {   //display language information
             language_info();
         }
 
         private void supplier_info_btn_Click(object sender, EventArgs e)
-        {
+        {   //display supplier information
             supplier_info();
         }
 
@@ -408,7 +411,7 @@ namespace FYP_sale_book_system
         }
 
         private void e_book_info_btn_Click(object sender, EventArgs e)
-        {
+        {   //display e-book information
             ebook_info();
         }
 
@@ -435,8 +438,11 @@ namespace FYP_sale_book_system
 
         private void add_item_btn_Click(object sender, EventArgs e)
         {
-            Int64 snid_data = Convert.ToInt64(snid_txt.Text);
-            int anthor_data = Convert.ToInt32(author_id_txt.Text);
+            if (this.dept_data != "" && check.checkNUM(snid_txt.Text)&& author_id_txt.Text != "" && language_id_txt.Text != "" && category_id_txt.Text != "" && supplier_id_txt.Text != "" &&
+                location_id_txt.Text != "" && ebook_id_txt.Text != "" && book_name_txt.Text != "" && check.checkNUM(qty_txt.Text) && check.checkNUM(stock_lv_txt.Text) && check.checkNUM(unit_price_txt.Text) && in_date_txt.Text != "" && detail_txt.Text != "" && status_txt.Text != "")
+            {
+                Int64 snid_data = Convert.ToInt64(snid_txt.Text);
+            int author_data = Convert.ToInt32(author_id_txt.Text);
             int language_data = Convert.ToInt32(language_id_txt.Text);
             int category_data = Convert.ToInt32(category_id_txt.Text);
             int supplier_data = Convert.ToInt32(supplier_id_txt.Text);
@@ -449,36 +455,43 @@ namespace FYP_sale_book_system
             string date_data = in_date_txt.Text;
             string detail_data = detail_txt.Text;
             string book_status = status_txt.Text;
+          
+                this.resultSYS = 0;
+                this.resultSYS = checkConnection(this.UI_mode);
 
-            this.resultSYS = 0;
-            this.resultSYS = checkConnection(this.UI_mode);
+                if (this.resultSYS == 1)
+                {
+                    //input new item
 
-            if (this.resultSYS == 1)
-            {
-                //input
-                string SQL = "insert into "+this.dept_data+" values(" + "null," + snid_data + "," + anthor_data + "," + language_data + "," + category_data + "," + supplier_data + "," +
-                                                      location_data + "," + ebook_data + ",'" + book_name_data + "'," + qty_data + "," + stock_lv_data + "," + unit_price_data + ",'" + date_data +"','"+detail_data+"','"+book_status+ "');";
-                DataTable dt = new DataTable();
-                MySqlCommand cmd = new MySqlCommand(SQL, conn);
-                MySqlDataReader myData = cmd.ExecuteReader();
-                dt.Load(myData);
-                dataGridView1.DataSource = dt;
-                conn.Close();
+                    string SQL = "insert into " + this.dept_data + " values(" + "null," + snid_data + "," + author_data + "," + language_data + "," + category_data + "," + supplier_data + "," +
+                                                          location_data + "," + ebook_data + ",'" + book_name_data + "'," + qty_data + "," + stock_lv_data + "," + unit_price_data + ",'" + date_data + "','" + detail_data + "','" + book_status + "');";
+                    DataTable dt = new DataTable();
+                    MySqlCommand cmd = new MySqlCommand(SQL, conn);
+                    MySqlDataReader myData = cmd.ExecuteReader();
+                    dt.Load(myData);
+                    dataGridView1.DataSource = dt;
+                    conn.Close();
 
+
+                }
+                else
+                {
+                    MessageBox.Show("Connection Error !!");
+                }
+                MessageBox.Show(this.dept_data + "Updated");
+                location_id_txt.ResetText();
+                sale_radio_Btn.Checked = false;
+                procure_radio_Btn.Checked = false;
             }
             else
             {
-                MessageBox.Show("Connection Error !!");
+                MessageBox.Show("Data is not complete!!");
             }
-            MessageBox.Show(this.dept_data+"Updated");
-            location_id_txt.ResetText();
-            sale_radio_Btn.Checked = false;
-            procure_radio_Btn.Checked = false;
-            
-        }
+
+            }
 
         private void clean_value_btn_Click(object sender, EventArgs e)
-        {
+        {    //restart value
             snid_txt.Clear();
             author_id_txt.ResetText();
             language_id_txt.ResetText();
@@ -496,6 +509,11 @@ namespace FYP_sale_book_system
             procure_radio_Btn.Checked = false;
             dataGridView1.Columns.Clear();
             this.dept_data = "";
+        }
+
+        private void qty_txt_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

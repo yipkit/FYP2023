@@ -30,6 +30,8 @@ namespace FYP_sale_book_system
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.To_BalanceM_BD = new System.Windows.Forms.RadioButton();
+            this.To_BalanceM_CD = new System.Windows.Forms.RadioButton();
             this.comb_7 = new System.Windows.Forms.ComboBox();
             this.comb_6 = new System.Windows.Forms.ComboBox();
             this.comb_5 = new System.Windows.Forms.ComboBox();
@@ -69,21 +71,17 @@ namespace FYP_sale_book_system
             this.label5 = new System.Windows.Forms.Label();
             this.btn_SubmitTAccount = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btn_ReviewCompanyOrder = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.dateTimePicker_End = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker_start = new System.Windows.Forms.DateTimePicker();
-            this.comb_Type = new System.Windows.Forms.ComboBox();
             this.comb_Title = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label11 = new System.Windows.Forms.Label();
             this.btn_SearchTAN = new System.Windows.Forms.Button();
             this.comb_TAccountName = new System.Windows.Forms.ComboBox();
-            this.To_BalanceM_CD = new System.Windows.Forms.RadioButton();
-            this.To_BalanceM_BD = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -114,6 +112,30 @@ namespace FYP_sale_book_system
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select T Account Mode";
+            // 
+            // To_BalanceM_BD
+            // 
+            this.To_BalanceM_BD.AutoSize = true;
+            this.To_BalanceM_BD.Location = new System.Drawing.Point(135, 123);
+            this.To_BalanceM_BD.Name = "To_BalanceM_BD";
+            this.To_BalanceM_BD.Size = new System.Drawing.Size(82, 16);
+            this.To_BalanceM_BD.TabIndex = 20;
+            this.To_BalanceM_BD.TabStop = true;
+            this.To_BalanceM_BD.Text = "Balance B/D";
+            this.To_BalanceM_BD.UseVisualStyleBackColor = true;
+            this.To_BalanceM_BD.CheckedChanged += new System.EventHandler(this.To_BalanceM_BD_CheckedChanged);
+            // 
+            // To_BalanceM_CD
+            // 
+            this.To_BalanceM_CD.AutoSize = true;
+            this.To_BalanceM_CD.Location = new System.Drawing.Point(6, 123);
+            this.To_BalanceM_CD.Name = "To_BalanceM_CD";
+            this.To_BalanceM_CD.Size = new System.Drawing.Size(82, 16);
+            this.To_BalanceM_CD.TabIndex = 19;
+            this.To_BalanceM_CD.TabStop = true;
+            this.To_BalanceM_CD.Text = "Balance C/D";
+            this.To_BalanceM_CD.UseVisualStyleBackColor = true;
+            this.To_BalanceM_CD.CheckedChanged += new System.EventHandler(this.To_BalanceM_CheckedChanged);
             // 
             // comb_7
             // 
@@ -550,15 +572,13 @@ namespace FYP_sale_book_system
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.btn_ReviewCompanyOrder);
             this.groupBox4.Controls.Add(this.label15);
             this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Controls.Add(this.label13);
             this.groupBox4.Controls.Add(this.label12);
             this.groupBox4.Controls.Add(this.dateTimePicker_End);
             this.groupBox4.Controls.Add(this.dateTimePicker_start);
-            this.groupBox4.Controls.Add(this.comb_Type);
             this.groupBox4.Controls.Add(this.comb_Title);
-            this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Location = new System.Drawing.Point(354, 104);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(332, 167);
@@ -566,10 +586,20 @@ namespace FYP_sale_book_system
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Review Company Data Order";
             // 
+            // btn_ReviewCompanyOrder
+            // 
+            this.btn_ReviewCompanyOrder.Location = new System.Drawing.Point(147, 116);
+            this.btn_ReviewCompanyOrder.Name = "btn_ReviewCompanyOrder";
+            this.btn_ReviewCompanyOrder.Size = new System.Drawing.Size(174, 23);
+            this.btn_ReviewCompanyOrder.TabIndex = 9;
+            this.btn_ReviewCompanyOrder.Text = "Search";
+            this.btn_ReviewCompanyOrder.UseVisualStyleBackColor = true;
+            this.btn_ReviewCompanyOrder.Click += new System.EventHandler(this.btn_ReviewCompanyOrder_Click);
+            // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(47, 114);
+            this.label15.Location = new System.Drawing.Point(47, 92);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(69, 12);
             this.label15.TabIndex = 8;
@@ -578,20 +608,11 @@ namespace FYP_sale_book_system
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(32, 86);
+            this.label14.Location = new System.Drawing.Point(32, 64);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(84, 12);
             this.label14.TabIndex = 7;
             this.label14.Text = "Beginning Date :";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(81, 56);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(35, 12);
-            this.label13.TabIndex = 6;
-            this.label13.Text = "Type :";
             // 
             // label12
             // 
@@ -604,42 +625,35 @@ namespace FYP_sale_book_system
             // 
             // dateTimePicker_End
             // 
-            this.dateTimePicker_End.Location = new System.Drawing.Point(147, 107);
+            this.dateTimePicker_End.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker_End.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker_End.Location = new System.Drawing.Point(147, 85);
             this.dateTimePicker_End.Name = "dateTimePicker_End";
             this.dateTimePicker_End.Size = new System.Drawing.Size(174, 22);
             this.dateTimePicker_End.TabIndex = 4;
             // 
             // dateTimePicker_start
             // 
-            this.dateTimePicker_start.Location = new System.Drawing.Point(147, 79);
+            this.dateTimePicker_start.CustomFormat = "yyyy-MM-dd";
+            this.dateTimePicker_start.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker_start.Location = new System.Drawing.Point(147, 57);
             this.dateTimePicker_start.Name = "dateTimePicker_start";
             this.dateTimePicker_start.Size = new System.Drawing.Size(174, 22);
             this.dateTimePicker_start.TabIndex = 3;
             // 
-            // comb_Type
-            // 
-            this.comb_Type.FormattingEnabled = true;
-            this.comb_Type.Location = new System.Drawing.Point(147, 53);
-            this.comb_Type.Name = "comb_Type";
-            this.comb_Type.Size = new System.Drawing.Size(174, 20);
-            this.comb_Type.TabIndex = 2;
-            // 
             // comb_Title
             // 
             this.comb_Title.FormattingEnabled = true;
+            this.comb_Title.Items.AddRange(new object[] {
+            "Staff Salary",
+            "Sales Stock",
+            "Sales Order",
+            "Purchase Order",
+            "Procurement Stock"});
             this.comb_Title.Location = new System.Drawing.Point(147, 27);
             this.comb_Title.Name = "comb_Title";
             this.comb_Title.Size = new System.Drawing.Size(174, 20);
             this.comb_Title.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(147, 132);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(174, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Search";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
@@ -680,30 +694,6 @@ namespace FYP_sale_book_system
             this.comb_TAccountName.Size = new System.Drawing.Size(219, 20);
             this.comb_TAccountName.TabIndex = 0;
             this.comb_TAccountName.Text = "T Account Name";
-            // 
-            // To_BalanceM_CD
-            // 
-            this.To_BalanceM_CD.AutoSize = true;
-            this.To_BalanceM_CD.Location = new System.Drawing.Point(6, 123);
-            this.To_BalanceM_CD.Name = "To_BalanceM_CD";
-            this.To_BalanceM_CD.Size = new System.Drawing.Size(82, 16);
-            this.To_BalanceM_CD.TabIndex = 19;
-            this.To_BalanceM_CD.TabStop = true;
-            this.To_BalanceM_CD.Text = "Balance C/D";
-            this.To_BalanceM_CD.UseVisualStyleBackColor = true;
-            this.To_BalanceM_CD.CheckedChanged += new System.EventHandler(this.To_BalanceM_CheckedChanged);
-            // 
-            // To_BalanceM_BD
-            // 
-            this.To_BalanceM_BD.AutoSize = true;
-            this.To_BalanceM_BD.Location = new System.Drawing.Point(135, 123);
-            this.To_BalanceM_BD.Name = "To_BalanceM_BD";
-            this.To_BalanceM_BD.Size = new System.Drawing.Size(82, 16);
-            this.To_BalanceM_BD.TabIndex = 20;
-            this.To_BalanceM_BD.TabStop = true;
-            this.To_BalanceM_BD.Text = "Balance B/D";
-            this.To_BalanceM_BD.UseVisualStyleBackColor = true;
-            this.To_BalanceM_BD.CheckedChanged += new System.EventHandler(this.To_BalanceM_BD_CheckedChanged);
             // 
             // Accounting_EditTAccount
             // 
@@ -779,13 +769,10 @@ namespace FYP_sale_book_system
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.DateTimePicker dateTimePicker_End;
         private System.Windows.Forms.DateTimePicker dateTimePicker_start;
-        private System.Windows.Forms.ComboBox comb_Type;
         private System.Windows.Forms.ComboBox comb_Title;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txt_DescA;
         private System.Windows.Forms.TextBox txt_DescB;
         private System.Windows.Forms.Label label20;
@@ -803,5 +790,6 @@ namespace FYP_sale_book_system
         private System.Windows.Forms.ComboBox comb_6;
         private System.Windows.Forms.RadioButton To_BalanceM_CD;
         private System.Windows.Forms.RadioButton To_BalanceM_BD;
+        private System.Windows.Forms.Button btn_ReviewCompanyOrder;
     }
 }

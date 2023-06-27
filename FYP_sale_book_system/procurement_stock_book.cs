@@ -12,40 +12,14 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_stock_book : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         private MySqlConnection conn;
         private int resultSYS;
         string stock_type = "";
         string stock_status = "";
-        /*public static MySqlConnection connDB2()
-        {
-
-            string host = "localhost";
-            string user = "root";
-            string pwd = "exia0721";
-            string databaseName = "database_version1";
-
-            string connStr = "server=" + host + ";uid=" + user + ";pwd=" + pwd + ";database=" + databaseName;
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-            }
-            catch (MySql.Data.MySqlClient.MySqlException ex)
-            {
-                switch (ex.Number)
-                {
-                    case 0:
-                        Console.WriteLine("無法連線到資料庫.");
-                        break;
-                    case 1045:
-                        Console.WriteLine("使用者帳號或密碼錯誤,請再試一次.");
-                        break;
-                }
-            }
-            return conn;
-        }*/
+        ErrorControl check = new ErrorControl();
+        procurement_review_stock_function review_Stock;
 
       
 
@@ -110,10 +84,11 @@ namespace FYP_sale_book_system
         }
 
 
-        public procurement_stock_book(string uIMode)
+        public procurement_stock_book(procurement_review_stock_function review_Stock_Function, string uIMode)
         {
             InitializeComponent();
             this.UI_mode = uIMode;
+            this.review_Stock = review_Stock_Function;
         }
 
         private void procurement_stock_book_Load(object sender, EventArgs e)
@@ -132,7 +107,7 @@ namespace FYP_sale_book_system
             if (this.resultSYS == 1)
             {
                 //display info
-                string SQL1 = "select * from procurement_stock_book;";
+                string SQL1 = "select stock_book_no 'Stock Book No',comp_LocationID 'Location',invoice_no 'Invoice No',supplier_dept 'Supplier department',supplier_name 'Supplier Name',car_no 'Car No',stock_book_date 'Date',stock_book_time 'Time',stock_type 'Stock Type',SNID ,book_name 'Book Name',book_qty 'Qty',book_status 'Status' from procurement_stock_book;";
                 DataTable dt1 = new DataTable();
                 MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
                 MySqlDataReader myData1 = cmd1.ExecuteReader();
@@ -176,7 +151,7 @@ namespace FYP_sale_book_system
         {
            
            
-            if (stock_book_no_txt.Text != "")
+            if (stock_book_no_txt.Text != "" && check.checkNUM(stock_book_no_txt.Text))
             {
 
                 this.resultSYS = 0;
@@ -219,6 +194,7 @@ namespace FYP_sale_book_system
 
         private void update_btn_Click(object sender, EventArgs e)
         {
+            if (stock_book_no_txt.Text!=""&&supplier_txt.Text!=""&&this.stock_type!=""&&this.stock_status!=""&&dept_txt.Text!=""&&car_no_txt.Text!="") { 
             string invoice_data = invoice_txt.Text;
             string cust_name_data = cust_name_txt.Text;
             string supplier_name_data = supplier_txt.Text;
@@ -237,7 +213,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                //input
+                //update stock book information
                 string SQL = "insert into procurement_stock_book values(" + "null," + 1 + ",'" + invoice_data + "','" + dept_data + "','" + supplier_name_data + "','" + car_no_data + "','" +
                                                       date_data + "','" + time_data + "','" + stock_type + "','" + snid_data + "','" + item_name_data + "'," + qty_data + ",'" + stock_status + "');";
                 DataTable dt = new DataTable();
@@ -268,6 +244,11 @@ namespace FYP_sale_book_system
             in_radiio.Checked = false;
             out_radio.Checked = false;
             cust_name_txt.Text = "N/A";
+            }
+            else {
+                MessageBox.Show("Please enter stock book number!!"); 
+            }
+            
         }
 
         private void sh_supplier_btn_Click(object sender, EventArgs e)
@@ -276,7 +257,7 @@ namespace FYP_sale_book_system
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
-            {
+            {   //display supplier information
                 string SQL = "select * from supplier;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
@@ -292,13 +273,13 @@ namespace FYP_sale_book_system
         }
 
         private void restart_btn_Click(object sender, EventArgs e)
-        {
+        {     
             this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
             if (this.resultSYS == 1)
             {
-                //display info
+                //restart stock book information
                 string SQL2 = "select * from procurement_stock_book;";
                 DataTable dt2 = new DataTable();
                 MySqlCommand cmd2 = new MySqlCommand(SQL2, conn);

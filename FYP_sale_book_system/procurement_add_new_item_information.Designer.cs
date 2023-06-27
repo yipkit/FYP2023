@@ -39,7 +39,7 @@ namespace FYP_sale_book_system
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.update_author_btn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.anthor_name_txt = new System.Windows.Forms.TextBox();
+            this.author_name_txt = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.category_detail_txt = new System.Windows.Forms.TextBox();
@@ -47,6 +47,8 @@ namespace FYP_sale_book_system
             this.label2 = new System.Windows.Forms.Label();
             this.category_txt = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.ebook_price_txt = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.ebook_link_status_txt = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -161,7 +163,7 @@ namespace FYP_sale_book_system
             // 
             this.groupBox2.Controls.Add(this.update_author_btn);
             this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.anthor_name_txt);
+            this.groupBox2.Controls.Add(this.author_name_txt);
             this.groupBox2.Location = new System.Drawing.Point(23, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(214, 194);
@@ -188,12 +190,12 @@ namespace FYP_sale_book_system
             this.label1.TabIndex = 3;
             this.label1.Text = "Author Name";
             // 
-            // anthor_name_txt
+            // author_name_txt
             // 
-            this.anthor_name_txt.Location = new System.Drawing.Point(84, 21);
-            this.anthor_name_txt.Name = "anthor_name_txt";
-            this.anthor_name_txt.Size = new System.Drawing.Size(124, 22);
-            this.anthor_name_txt.TabIndex = 3;
+            this.author_name_txt.Location = new System.Drawing.Point(84, 21);
+            this.author_name_txt.Name = "author_name_txt";
+            this.author_name_txt.Size = new System.Drawing.Size(124, 22);
+            this.author_name_txt.TabIndex = 3;
             // 
             // groupBox3
             // 
@@ -253,6 +255,8 @@ namespace FYP_sale_book_system
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.ebook_price_txt);
+            this.groupBox4.Controls.Add(this.label15);
             this.groupBox4.Controls.Add(this.label10);
             this.groupBox4.Controls.Add(this.ebook_link_status_txt);
             this.groupBox4.Controls.Add(this.label9);
@@ -266,10 +270,26 @@ namespace FYP_sale_book_system
             this.groupBox4.Controls.Add(this.ebook_snid_txt);
             this.groupBox4.Location = new System.Drawing.Point(495, 12);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(214, 194);
+            this.groupBox4.Size = new System.Drawing.Size(214, 224);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "E-book Information";
+            // 
+            // ebook_price_txt
+            // 
+            this.ebook_price_txt.Location = new System.Drawing.Point(84, 157);
+            this.ebook_price_txt.Name = "ebook_price_txt";
+            this.ebook_price_txt.Size = new System.Drawing.Size(124, 22);
+            this.ebook_price_txt.TabIndex = 13;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(6, 165);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(28, 12);
+            this.label15.TabIndex = 12;
+            this.label15.Text = "Price";
             // 
             // label10
             // 
@@ -339,7 +359,7 @@ namespace FYP_sale_book_system
             // 
             // update_ebook_btn
             // 
-            this.update_ebook_btn.Location = new System.Drawing.Point(108, 165);
+            this.update_ebook_btn.Location = new System.Drawing.Point(133, 191);
             this.update_ebook_btn.Name = "update_ebook_btn";
             this.update_ebook_btn.Size = new System.Drawing.Size(75, 23);
             this.update_ebook_btn.TabIndex = 3;
@@ -566,7 +586,7 @@ namespace FYP_sale_book_system
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button update_author_btn;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox anthor_name_txt;
+        private System.Windows.Forms.TextBox author_name_txt;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox category_detail_txt;
@@ -602,5 +622,7 @@ namespace FYP_sale_book_system
         private System.Windows.Forms.TextBox supplier_address_txt;
         private System.Windows.Forms.Button close_btn;
         private System.Windows.Forms.ComboBox language_txt;
+        private System.Windows.Forms.TextBox ebook_price_txt;
+        private System.Windows.Forms.Label label15;
     }
 }

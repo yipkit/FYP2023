@@ -12,13 +12,14 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class sales_check_sales_stock : Form
-    {
+    {   //NG TSZ KIN
         //private
         private MySqlConnection conn;//Location: connectDB.cs
         private int selection;
         private int resultSYS;
         private int count = 0;
         string UI_mode = "";
+        ErrorControl check = new ErrorControl();
         
         
 
@@ -49,7 +50,7 @@ namespace FYP_sale_book_system
                 {
 
 
-                    string SQL1 = "select SNID from procurementstock";
+                    string SQL1 = "select SNID from salestock where phasing_out_status = 'No';";
                     DataTable dt1 = new DataTable();
                     MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
                     MySqlDataReader myData1 = cmd1.ExecuteReader();
@@ -194,7 +195,8 @@ namespace FYP_sale_book_system
             {
 
                 //display stock info
-                string SQL = "select * from salestock;";
+                string SQL = "select sale_stock_id, SNID,bookname,book_qty,book_stockLv, authors_name as AuthorsName,language,category,detail ,book_date, phasing_out_status,comp_LocationID, comp_Name " +
+                                "from salestock p, authors a,languages l,category c,company comp where p.comp_LocationID = comp.comp_LocationID and p.authors_id=a.authors_id and p.languages_id=l.languages_id and p.category_id = c.category_id ;";
                 DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
@@ -240,13 +242,13 @@ namespace FYP_sale_book_system
 
         private void update_btn_Click(object sender, EventArgs e)
         {
-            try
+            if(snid_txt.Text!=""&&location_id_txt.Text!=""&&check.checkNUM(qty_txt.Text))
             {
                 this.resultSYS = 0;
                 this.resultSYS = checkConnection(this.UI_mode);
 
                 if (this.resultSYS == 1)
-                {
+                {    //update item information
                     int item_qty = Convert.ToInt32(qty_txt.Text);
                     Int64 ref_data = Convert.ToInt64(snid_txt.Text);
                     string date_data = date_txt.Text;
@@ -269,7 +271,7 @@ namespace FYP_sale_book_system
                     MessageBox.Show("Please check the data again !!");
                 }
             }
-            catch (Exception c)
+            else
             {
 
                 MessageBox.Show("Please check the data again !!");
@@ -278,6 +280,7 @@ namespace FYP_sale_book_system
 
         private void sort_btn_Click(object sender, EventArgs e)
         {
+            if (snid_txt.Text!="") {
             this.resultSYS = 0;
             this.resultSYS = checkConnection(this.UI_mode);
 
@@ -287,9 +290,10 @@ namespace FYP_sale_book_system
                 Int64 data1 = Convert.ToInt64(snid_txt.Text);
 
 
-                //display re-order info
-                string SQL = "select * from salestock where SNID=" + data1 + ";";
-                DataTable dt = new DataTable();
+                    //search item information
+                    string SQL = "select sale_stock_id, SNID,bookname,book_qty,book_stockLv, authors_name as AuthorsName,language,category,detail ,book_date, phasing_out_status,p.comp_LocationID,comp_Name " +
+                                  "from salestock p, authors a,languages l,category c,company comp where p.comp_LocationID = comp.comp_LocationID and p.authors_id=a.authors_id and p.languages_id=l.languages_id and p.category_id = c.category_id and SNID=" + data1 + ";";
+                    DataTable dt = new DataTable();
                 MySqlCommand cmd = new MySqlCommand(SQL, conn);
                 MySqlDataReader myData = cmd.ExecuteReader();
                 dt.Load(myData);
@@ -301,10 +305,13 @@ namespace FYP_sale_book_system
             {
                 MessageBox.Show("Connection Error !!");
             }
+            }
+            else { MessageBox.Show("Please select SNID !!"); }
+            
         }
 
         private void show_stock_btn_Click(object sender, EventArgs e)
-        {
+        {   //display sale stock information
             sale_stock();
         }
 

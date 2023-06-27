@@ -35,7 +35,7 @@ namespace FYP_sale_book_system
         }
         public static MySqlConnection connDBLAMFUNG()
         {
-            string host = "192.168.50.21";
+            string host = "alicelycorisrecoil.asuscomm.com";
             string user = "FYP2023";
             string pwd = "R0306qaz";
             string databaseName = "database_version1";
@@ -63,7 +63,7 @@ namespace FYP_sale_book_system
 
         public static MySqlConnection connDBNGJACK()
         {
-            string host = "192.168.50.21";
+            string host = "alicelycorisrecoil.asuscomm.com";
             string user = "FYP2023";
             string pwd = "R0306qaz";
             string databaseName = "database_version1";
@@ -91,7 +91,7 @@ namespace FYP_sale_book_system
 
         public static MySqlConnection connDByipkit0830()
         {
-            string host = "192.168.50.21";
+            string host = "alicelycorisrecoil.asuscomm.com";
             string user = "FYP2023";
             string pwd = "R0306qaz";
             string databaseName = "database_version1";
@@ -119,7 +119,7 @@ namespace FYP_sale_book_system
 
         public static MySqlConnection connDBuser(string user, string pwd)
         {
-            string host = "192.168.50.21";
+            string host = "alicelycorisrecoil.asuscomm.com";
             string databaseName = "database_version1";
 
             string connStr = "server=" + host + ";uid=" + user + ";pwd=" + pwd + ";database=" + databaseName;

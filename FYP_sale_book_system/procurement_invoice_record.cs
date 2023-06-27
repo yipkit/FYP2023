@@ -12,11 +12,12 @@ using System.Windows.Forms;
 namespace FYP_sale_book_system
 {
     public partial class procurement_invoice_record : Form
-    {
+    {   //NG TSZ KIN
         string UI_mode;
         string status = "";
         private MySqlConnection conn;
         private int resultSYS;
+        ErrorControl check = new ErrorControl();
         private void supp_inf()
         {
 
@@ -57,7 +58,7 @@ namespace FYP_sale_book_system
 
             if (this.resultSYS == 1)
             {
-                string SQL1 = "select * from supplier;";
+            string SQL1 = "select supplier_id 'Supplier ID', supplier_name 'Supplier Name', supplier_address 'Supplier Address',supplier_phone 'Supplier Phone',supplier_dept 'Department',supplier_detail 'Detail' from supplier;";
             DataTable dt1 = new DataTable();
             MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
             MySqlDataReader myData1 = cmd1.ExecuteReader();
@@ -101,7 +102,7 @@ namespace FYP_sale_book_system
 
 
 
-                    string SQL1 = "select SNID from procurementstock";
+                    string SQL1 = "select SNID from procurementstock where phasing_out_status = 'No';";
                     DataTable dt1 = new DataTable();
                     MySqlCommand cmd1 = new MySqlCommand(SQL1, conn);
                     MySqlDataReader myData1 = cmd1.ExecuteReader();
@@ -208,7 +209,7 @@ namespace FYP_sale_book_system
                     {
                         string data = supplier_txt.Text;
 
-                        string SQL4 = "select supplier_id,supplier_phone,supplier_address,supplier_dept from supplier where supplier_name = '" + data + "';";
+                        string SQL4 = "select supplier_id 'Supplier ID', supplier_name 'Supplier Name', supplier_address 'Supplier Address',supplier_phone 'Supplier Phone',supplier_dept 'Department',supplier_detail 'Detail' from supplier where supplier_name = '" + data + "';";
                         DataTable dt4 = new DataTable();
                         MySqlCommand cmd4 = new MySqlCommand(SQL4, conn);
 
@@ -294,53 +295,59 @@ namespace FYP_sale_book_system
 
         private void save_btn_Click(object sender, EventArgs e)
         {
-          
-            int invoice_data = Convert.ToInt32(invoice_no_txt.Text);
-            string supplier_name_data = supplier_txt.Text;
-            string date_data = r_date_txt.Text;
-            Int64 snid_data = Convert.ToInt64(snid_txt.Text);
-            string item_name_data = item_name_txt.Text;
-            int qty_data = Convert.ToInt32(qty_txt.Text);
-            string dept_data = s_dept_txt.Text;
-            string remark_data = remark_txt.Text;
-            string address_data = s_address_txt.Text;
-            int phone_data = Convert.ToInt32(s_phone_txt.Text);
-            int supplier_id = Convert.ToInt32(supplier_id_txt.Text);
-            int company_id = Convert.ToInt32(company_id_txt.Text);
-
-            this.resultSYS = 0;
-            this.resultSYS = checkConnection(this.UI_mode);
-            if (this.resultSYS == 1)
+            if (invoice_no_txt.Text != "" && company_id_txt.Text != "" && snid_txt.Text != "" && check.checkNUM(qty_txt.Text) && remark_txt.Text != "" && supplier_txt.Text != "" && s_dept_txt.Text != ""&&this.status!="")
             {
-                //input
-                string SQL2 = "insert into invoice_record values(" + "null," + supplier_id + "," + company_id + "," + invoice_data + ",'" + supplier_name_data + "','" + address_data +"',"+phone_data +",'" +
-                  dept_data + "','" + date_data + "'," + snid_data + ",'" + item_name_data + "'," + qty_data + ",'" + status + "','" + remark_data + "');";
-                DataTable dt2 = new DataTable();
-                MySqlCommand cmd = new MySqlCommand(SQL2, conn);
-                MySqlDataReader myData2 = cmd.ExecuteReader();
-                dt2.Load(myData2);
-                dataGridView1.DataSource = dt2;
-                MessageBox.Show("Saved");
-                conn.Close();
+                int invoice_data = Convert.ToInt32(invoice_no_txt.Text);
+                string supplier_name_data = supplier_txt.Text;
+                string date_data = r_date_txt.Text;
+                Int64 snid_data = Convert.ToInt64(snid_txt.Text);
+                string item_name_data = item_name_txt.Text;
+                int qty_data = Convert.ToInt32(qty_txt.Text);
+                string dept_data = s_dept_txt.Text;
+                string remark_data = remark_txt.Text;
+                string address_data = s_address_txt.Text;
+                int phone_data = Convert.ToInt32(s_phone_txt.Text);
+                int supplier_id = Convert.ToInt32(supplier_id_txt.Text);
+                int company_id = Convert.ToInt32(company_id_txt.Text);
+
+                this.resultSYS = 0;
+                this.resultSYS = checkConnection(this.UI_mode);
+                if (this.resultSYS == 1)
+                {
+                    //input invoice information
+                    string SQL2 = "insert into invoice_record values(" + "null," + supplier_id + "," + company_id + "," + invoice_data + ",'" + supplier_name_data + "','" + address_data + "'," + phone_data + ",'" +
+                      dept_data + "','" + date_data + "'," + snid_data + ",'" + item_name_data + "'," + qty_data + ",'" + status + "','" + remark_data + "');";
+                    DataTable dt2 = new DataTable();
+                    MySqlCommand cmd = new MySqlCommand(SQL2, conn);
+                    MySqlDataReader myData2 = cmd.ExecuteReader();
+                    dt2.Load(myData2);
+                    dataGridView1.DataSource = dt2;
+                    MessageBox.Show("Saved");
+                    conn.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Connection Error !!");
+                }
+                invoice_no_txt.Clear();
+                company_id_txt.ResetText();
+                supplier_id_txt.ResetText();
+                snid_txt.ResetText();
+                item_name_txt.Clear();
+                qty_txt.Clear();
+                s_dept_txt.Clear();
+                remark_txt.Clear();
+                s_phone_txt.Clear();
+                s_address_txt.Clear();
+                complete_radio.Checked = false;
+                non_complete_radio.Checked = false;
             }
             else
             {
-                MessageBox.Show("Connection Error !!");
+                MessageBox.Show("Data is not complete!!");
             }
-            invoice_no_txt.Clear();
-            company_id_txt.ResetText();
-            supplier_id_txt.ResetText();
-            snid_txt.ResetText();
-            item_name_txt.Clear();
-            qty_txt.Clear();
-            s_dept_txt.Clear();
-            remark_txt.Clear();
-            s_phone_txt.Clear();
-            s_address_txt.Clear();
-            complete_radio.Checked = false;
-            non_complete_radio.Checked = false;
-          
-           
+
+
         }
 
         private void restart_btn_Click(object sender, EventArgs e)
